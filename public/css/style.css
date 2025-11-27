@@ -1,0 +1,458 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #1f2933 0, #020617 55%, #000 100%);
+    color: #e5e7eb;
+    min-height: 100vh;
+}
+
+a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pf-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pf-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(17, 24, 39, 0.95));
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.pf-logo-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.pf-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #f97316, #facc15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #111827;
+    font-size: 1.2rem;
+}
+
+.pf-logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.pf-logo-text-main {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.pf-logo-text-sub {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.pf-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 9999px;
+    padding: 0.35rem 0.5rem 0.35rem 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.pf-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.pf-search-input::placeholder {
+    color: #6b7280;
+}
+
+.pf-search-button {
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(to right, #22c55e, #16a34a);
+    color: #f9fafb;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pf-search-button:hover {
+    filter: brightness(1.06);
+}
+
+.pf-main {
+    flex: 1;
+    padding: 1.5rem 2rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pf-footer {
+    padding: 1rem 2rem 2rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+}
+
+/* Sekcje na stronach */
+.pf-section {
+    margin-bottom: 2rem;
+}
+
+.pf-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.pf-section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.pf-section-subtitle {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+/* Tabela top filmów */
+.pf-table-wrapper {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+}
+
+table.pf-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+table.pf-table th,
+table.pf-table td {
+    padding: 0.55rem 0.5rem;
+    text-align: left;
+}
+
+table.pf-table thead {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+}
+
+table.pf-table tbody tr:nth-child(even) {
+    background-color: rgba(15, 23, 42, 0.7);
+}
+
+table.pf-table tbody tr:hover {
+    background-color: rgba(30, 64, 175, 0.55);
+}
+
+.pf-badge-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 9999px;
+    padding: 0.2rem 0.6rem;
+    background: rgba(250, 204, 21, 0.1);
+    border: 1px solid rgba(250, 204, 21, 0.6);
+    font-size: 0.8rem;
+}
+
+/* Karty filmów (katalog) */
+.pf-movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+
+.pf-movie-card {
+    background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.4), rgba(15, 23, 42, 0.95));
+    border-radius: 1.1rem;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pf-movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.95);
+    border-color: rgba(59, 130, 246, 0.8);
+}
+
+.pf-movie-banner {
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.pf-movie-banner--placeholder {
+    background: linear-gradient(135deg, #4b5563, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
+
+.pf-movie-rating-chip {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(250, 204, 21, 0.8);
+    font-size: 0.75rem;
+}
+
+.pf-movie-card-body {
+    padding: 0.85rem 0.9rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.pf-movie-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.pf-movie-meta {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+.pf-movie-platforms {
+    margin-top: 0.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.pf-chip {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.pf-chip--primary {
+    border-color: rgba(59, 130, 246, 0.9);
+    background: rgba(30, 64, 175, 0.6);
+}
+
+.pf-chip--muted {
+    border-style: dashed;
+    color: #9ca3af;
+}
+
+.pf-movie-card-footer {
+    padding: 0.65rem 0.9rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.9);
+}
+
+.pf-link-subtle {
+    font-size: 0.8rem;
+    color: #93c5fd;
+}
+
+/* Strona szczegółów */
+.pf-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.pf-detail-poster {
+    background: radial-gradient(circle at top, #1e293b, #020617);
+    border-radius: 1.1rem;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.9);
+}
+
+.pf-detail-poster-img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+.pf-detail-poster-placeholder {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.pf-detail-main {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 1.1rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    padding: 1.25rem 1.4rem 1.3rem;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.85);
+}
+
+.pf-detail-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.pf-detail-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.pf-detail-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.pf-detail-rating-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.pf-detail-rating-label {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.pf-detail-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.pf-detail-meta-item {
+    font-size: 0.8rem;
+    color: #e5e7eb;
+}
+
+.pf-detail-section-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #9ca3af;
+    margin-top: 0.9rem;
+    margin-bottom: 0.35rem;
+}
+
+.pf-detail-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #d1d5db;
+}
+
+.pf-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+    margin-top: 0.6rem;
+}
+
+.pf-detail-label {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.pf-detail-value {
+    font-size: 0.9rem;
+}
+
+.pf-detail-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+}
+
+.pf-back-link {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .pf-main {
+        padding: 1rem 1rem 2rem;
+    }
+    .pf-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    .pf-search-form {
+        max-width: 100%;
+    }
+    .pf-detail-layout {
+        grid-template-columns: 1fr;
+    }
+}

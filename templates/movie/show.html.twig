@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ movie.title }} – szczegóły{% endblock %}
+
+{% block body %}
+    <h1>{{ movie.title }}</h1>
+    <br>
+
+    <p><strong>Opis: </strong>
+        {{ movie.description ?? 'Brak opisu.' }}
+    </p>
+
+    <p><strong>Reżyser: </strong> {{ movie.director ?? '-' }}</p>
+    <p><strong>Scenarzysta: </strong> {{ movie.screenwriter ?? '-' }}</p>
+
+    <p><strong>Data premiery: </strong>
+        {% if movie.releaseDate %}
+            {{ movie.releaseDate|date('Y-m-d') }}
+        {% else %}
+            -
+        {% endif %}
+    </p>
+
+    <p><strong>Gatunek: </strong> {{ movie.genre ?? '-' }}</p>
+    <p><strong>Długość: </strong>
+        {% if movie.length %}
+            {{ movie.length }} min
+        {% else %}
+            -
+        {% endif %}
+    </p>
+
+    <p><strong>Kraj: </strong> {{ movie.country ?? '-' }}</p>
+
+    <p><strong>Ocena (średnia):</strong>
+        {% if movie.rating is not null %}
+            {{ movie.rating }}/5
+        {% else %}
+            brak ocen
+        {% endif %}
+    </p>
+
+    {# Jeśli w encji Movie masz pole banner z URL-em do obrazka #}
+    {% if movie.banner %}
+        <p>
+            <strong>Baner: </strong>
+            <img src="{{ movie.banner }}" alt="Baner filmu {{ movie.title }}" style="max-width: 300px;">
+        </p>
+    {% endif %}
+
+    </br>
+    <p>
+        <a href="{{ path('app_home') }}">← Powrót do listy filmów</a>
+    </p>
+{% endblock %}
