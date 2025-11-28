@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}PlusFlix – katalog filmów{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎬</text></svg>">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="pf-app">
+            <header class="pf-header">
+                <div class="pf-logo-box">
+                    <div class="pf-logo-placeholder">
+                        PF
+                    </div>
+                    <div class="pf-logo-text">
+                        <span class="pf-logo-text-main">PlusFlix</span>
+                        <span class="pf-logo-text-sub">katalog filmów &amp; streaming</span>
+                    </div>
+                </div>
+
+                <form class="pf-search-form" action="{{ path('app_home') }}" method="get">
+                    <input
+                        type="text"
+                        name="q"
+                        class="pf-search-input"
+                        placeholder="Szukaj tytułu..."
+                        value="{{ app.request.get('q') }}"
+                    >
+                    <button type="submit" class="pf-search-button">
+                        <span>🔍</span>
+                        <span>Szukaj</span>
+                    </button>
+                </form>
+            </header>
+
+            <main class="pf-main">
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer class="pf-footer">
+                PlusFlix · katalog filmów oraz ich dostępność na platformach streamingowych · Aplikacje Internetowe · {{ "now"|date("Y") }}
+            </footer>
+        </div>
+    </body>
+</html>
