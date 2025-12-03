@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PlusFlix - zaloguj{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/admin-login.css') }}">
+    {% endblock %}
+
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-header">PANEL ADMINISTRATORA</h1>
+
+        <form>
+            <label class="login-label" for="login">Login</label>
+            <input class="login-input" type="text" id="login" name="login">
+
+            <label class="login-label" for="password">Hasło</label>
+            <input class="login-input" type="password" id="password" name="password">
+
+            <button class="login-submit" type="submit">Zaloguj</button>
+        </form>
+    </div>
+</body>
+</html>
