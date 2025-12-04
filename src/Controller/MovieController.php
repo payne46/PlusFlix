@@ -15,8 +15,8 @@ class MovieController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(
-        Request $request, 
-        MovieRepository $movieRepository, 
+        Request $request,
+        MovieRepository $movieRepository,
         StreamingPlatformRepository $streamingPlatformRepository): Response
     {
         // Get query string
@@ -24,7 +24,7 @@ class MovieController extends AbstractController
 
         // Get all movies
         $movies = $movieRepository->findAll();
-        
+
         // Get top movies
         $topMovies = $movieRepository->getTopMovies(3);
 
@@ -41,7 +41,7 @@ class MovieController extends AbstractController
                 'streamingPlatforms' => $streamingPlatforms,
                 'searchResults'      => $serachResults
             ]);
-        } 
+        }
 
         return $this->render('movie/index.html.twig', [
             'movies'        => $movies,
@@ -59,7 +59,7 @@ class MovieController extends AbstractController
             throw $this->createNotFoundException('Film o podanym ID nie istnieje.');
         }
 
-        return $this->render('movie/show.html.twig', [
+        return $this->render('movie/show_mockup.html.twig', [
             'movie' => $movie,
         ]);
     }

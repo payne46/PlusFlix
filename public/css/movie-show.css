@@ -1,0 +1,300 @@
+html body{
+    background-color: #00111C;
+    /* height: 100%;  */
+    margin: 0;
+}
+
+header{
+    background: linear-gradient(90deg, rgba(0, 101, 163, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    height: 9.7vh;
+    width: 100%;
+}
+
+#return_button
+{
+    margin-top: 1.96vh;
+    margin-left: 2.57vw;
+}
+
+#content{
+    margin-top: 5.88vh;
+    margin-left: 9.8vw;
+    margin-right: 9.8vw;
+    height: 51vh;
+    display:flex;
+    gap: 3.96vw;
+}
+#left_data{
+    display: flex;
+    flex-direction: column;
+    width: 26vw;
+    height: 57.75vh;
+}
+
+#banner{
+    height: 51.27vh;
+    background-color: red;
+}
+
+#right_data{
+    display: flex;
+    flex-direction: column;
+    width: 56vw;
+    height: 51vh;
+}
+
+#title_contents{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title_box{
+    width: 100%;
+    height: 7.35vh;
+    color:white;
+    font-size:  2.50rem ;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#heart_icon{
+    height:  2.75rem ;
+    width:  3.00rem ;
+}
+
+#description{
+    color: white;
+    height: 14.8vh;
+    font-size:  1.50rem ;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+#properties_list{
+    display: flex;
+    height: 26.67vh;
+    flex-direction: column;
+    gap: 2vh;
+    margin-top: 2.45vh;
+}
+
+.movie_property{
+    width: 100%;
+    height: 4.41vh;
+    color:white;
+    font-size:  1.15rem ;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+}
+
+.movie_property_value{
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    margin-left: 0.2vw;
+    margin-top:0;
+    margin-bottom: 0;
+}
+
+#rating{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.star{
+    height:  3.00rem ;
+    width:   3.19rem ;
+}
+
+#rating_mean{
+    color: white;
+    font-size:  1.25rem ;
+    text-align: center;
+}
+
+#platforms_list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 9.71vh;
+    margin-left: 36.81vw;
+    gap: 1.47vh;
+
+}
+
+.platform{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 8.82vh;
+    width: 33.89vw;
+    background-color: #074E7F;
+    border-radius: 50px;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+.platform_baner{
+    height: 6.11vh;
+    width: 7.69vw;
+    border-radius: 50px;
+    background-color: green;
+}
+
+.platform_button{
+    height: 6.46vh;
+    width: 22.44vw;
+    background-color: #007BCF;
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: 0 0 10px #000000;
+    color:white;
+    font-size: 1.50rem;
+    font-family: "Lato", sans-serif;
+}
+
+.platform_button:hover{
+    background-color: #0097FF;
+}
+
+@media (max-width: 768px) {
+
+    header {
+        height: 6.71vh;
+    }
+
+    #return_button {
+        margin-top: 2vh;
+        margin-left: 5.83vw;
+    }
+
+    #content {
+        flex-direction: column;
+        margin-left: 6vw;
+        margin-right: 6vw;
+        margin-top:3.69vh;
+        gap: 1vh;
+        height: auto;
+        align-items: center;
+    }
+
+    #title_contents {
+        width: 100%;
+        justify-content:space-around;
+        align-items: center;
+    }
+
+    #title_box {
+        font-size: 1.4rem;
+        width: auto;
+        text-align: center;
+        justify-content: center;
+    }
+
+    #heart_icon {
+        height: 2.01vh;
+        width: 8.01vw;
+    }
+
+    #left_data {
+        width: 100%;
+        height: auto;
+        align-items: center;
+
+    }
+
+    #banner {
+        width: 90%;
+        height: 32vh;
+        border-radius: 12px;
+
+    }
+
+    #rating {
+        margin-top: 1vh;
+        width: 100%;
+        justify-content: center;
+
+    }
+
+    .star {
+        height: 2.4vh;
+        width: 9.71vw;
+    }
+
+    #rating_mean {
+        font-size: 1rem;
+    }
+
+
+    #right_data {
+        width: 100%;
+        height: auto;
+
+    }
+
+    #description {
+        font-size: 1rem;
+        height: auto;
+    }
+
+
+    #properties_list {
+        height: auto;
+        margin-top: 1vh;
+    }
+
+    .movie_property {
+        font-size: 1rem;
+        height: auto;
+        margin-bottom: 0.5vh;
+    }
+
+
+    #platforms_list {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 4vh;
+        width: 100%;
+        align-items: center;
+    }
+
+    #platforms_list::before {
+        content: "Dostępny na:";
+        color: white;
+        font-family: "Anton", sans-serif;
+        font-size: 1.3rem;
+        margin-bottom: 1vh;
+    }
+
+    .platform {
+        height: 2.82vh;
+        width: 68.69vw;
+        border-radius: 20px;
+        flex-direction: row;
+    }
+
+    .platform_baner {
+        height: 2.2vh;
+        width: 14.15vw;
+        border-radius: 50px;
+    }
+
+    .platform_button {
+        height: 2.11vh;
+        width: 45.48vw;
+        font-size:  1.00rem;
+        border-radius: 50px;
+    }
+}
