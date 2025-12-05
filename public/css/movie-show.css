@@ -1,3 +1,5 @@
+/* TODO - gwiazki przy zwezaniu do poprawy */
+
 html body{
     background-color: #00111C;
     /* height: 100%;  */
@@ -27,14 +29,17 @@ header{
 #left_data{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 26vw;
     height: 57.75vh;
 }
-
+/* added alignment */
 #banner{
     height: 51.27vh;
-    background-color: red;
+    width: 372px;
+    background-color: #4990e2;
 }
+/* Changed banner */
 
 #right_data{
     display: flex;
@@ -113,12 +118,12 @@ header{
     justify-content: center;
     gap: 1vw;
 }
-
+/* changed rating */
 .star{
     height:  3.00rem ;
-    width:   3.19rem ;
+    width:   2.7rem ;
 }
-
+/* changed width in star */
 #rating_mean{
     color: white;
     font-size:  1.25rem ;
@@ -130,7 +135,7 @@ header{
     flex-direction: column;
     margin-top: 9.71vh;
     margin-left: 36.81vw;
-    gap: 1.47vh;
+    gap: 2.47vh;
 
 }
 
@@ -149,7 +154,7 @@ header{
     height: 6.11vh;
     width: 7.69vw;
     border-radius: 50px;
-    background-color: green;
+    background-color: #4990e2;
 }
 
 .platform_button{
@@ -165,9 +170,11 @@ header{
 }
 
 .platform_button:hover{
-    background-color: #0097FF;
+    background-color: #80CCFF;
 }
-
+.platform_button:active{
+    background-color: #D4EEFF;
+}
 @media (max-width: 768px) {
 
     header {
@@ -203,7 +210,7 @@ header{
     }
 
     #heart_icon {
-        height: 2.01vh;
+        min-height: 2.01vh;
         width: 8.01vw;
     }
 
@@ -215,8 +222,8 @@ header{
     }
 
     #banner {
-        width: 90%;
-        height: 32vh;
+        max-width: 90%;
+        min-height: 32vh;
         border-radius: 12px;
 
     }
@@ -225,11 +232,11 @@ header{
         margin-top: 1vh;
         width: 100%;
         justify-content: center;
-
+        gap: 0.75vh;
     }
 
     .star {
-        height: 2.4vh;
+        min-height: 2.4vh;
         width: 9.71vw;
     }
 
@@ -279,22 +286,23 @@ header{
     }
 
     .platform {
-        height: 2.82vh;
+        height: 5vh;
         width: 68.69vw;
         border-radius: 20px;
         flex-direction: row;
     }
 
     .platform_baner {
-        height: 2.2vh;
+        height: 3.38vh;
         width: 14.15vw;
         border-radius: 50px;
     }
 
     .platform_button {
-        height: 2.11vh;
+        height: 3.38vh;
         width: 45.48vw;
-        font-size:  1.00rem;
+        font-size:  0.8rem;
         border-radius: 50px;
+        text-align: center;
     }
 }

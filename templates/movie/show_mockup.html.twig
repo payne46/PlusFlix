@@ -15,11 +15,11 @@
             <div id="left_data">
                 <div id="banner"></div>
                 <div id="rating">
-                    <img class="star" src="{{ asset('images/empty_star.png') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.png') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.png') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.png') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.png') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
                     <p id="rating_mean">(1)</p>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div id="right_data">
                 <div id="title_contents">
                     <div id="title_box">{{ movie.title }}</div>
-                    <img id="heart_icon" src="{{ asset('images/empty_heart.png') }}">
+                    <img id="heart_icon" src="{{ asset('images/empty_heart.svg') }}">
                 </div>
                 <div id="description">Genialny, ale egoistyczny naukowiec Wiktor Frankenstein usiłuje  rozwikłać zagadkę śmierci. Odkrywa możliwość stworzenia życia w martwym  ciele, lecz zamiast ideału powstaje inteligentne, wykazujące ludzkie  odruchy monstrum. Efekt tego potwornego eksperymentu ostatecznie  prowadzi do zguby zarówno twórcy, jak i jego tragicznego dzieła.</div>
                 <div id="properties_list">
@@ -55,8 +55,8 @@
         <script>
             const stars = document.querySelectorAll("#rating .star");
 
-            const emptyStar = "{{ asset('images/empty_star.png') }}";
-            const clickedStar = "{{ asset('images/clicked_star.png') }}";
+            const emptyStar = "{{ asset('images/empty_star.svg') }}";
+            const clickedStar = "{{ asset('images/clicked_star.svg') }}";
 
             stars.forEach((star, index) => {
                 star.addEventListener("click", () => {
@@ -70,11 +70,11 @@
 
             const heart = document.getElementById("heart_icon");
 
-            const emptyHeart = "{{ asset('images/empty_heart.png') }}";
-            const clickedHeart = "{{ asset('images/clicked_heart.png') }}";
+            const emptyHeart = "{{ asset('images/empty_heart.svg') }}";
+            const clickedHeart = "{{ asset('images/clicked_heart.svg') }}";
 
             heart.addEventListener("click", () => {
-                heart.src = heart.src.includes("empty_heart.png")
+                heart.src = heart.src.includes("empty_heart.svg")
                     ? clickedHeart
                     : emptyHeart;
             });
