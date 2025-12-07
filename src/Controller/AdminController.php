@@ -19,4 +19,38 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/main-panel.html.twig');
     }
+
+    #[Route('/admin/movie/add', name: 'admin_movie_add')]
+    public function addMovie(): Response
+    {
+        return $this->render('admin/movie-form.html.twig', [
+            'action' => 'add'
+        ]);
+    }
+
+    #[Route('/admin/movie/edit/{id}', name: 'admin_movie_edit', requirements: ['id' => '\d+'])]
+    public function editMovie(int $id): Response
+    {
+        return $this->render('admin/movie-form.html.twig', [
+            'action' => 'edit',
+            'id' => $id
+        ]);
+    }
+
+    #[Route('/admin/platform/add', name: 'admin_platform_add')]
+    public function addPlatform(): Response
+    {
+        return $this->render('admin/platform-form.html.twig', [
+            'action' => 'add'
+        ]);
+    }
+
+    #[Route('/admin/platform/edit/{id}', name: 'admin_platform_edit', requirements: ['id' => '\d+'])]
+    public function editPlatform(int $id): Response
+    {
+        return $this->render('admin/platform-form.html.twig', [
+            'action' => 'edit',
+            'id' => $id
+        ]);
+    }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ action == 'add' ? 'Dodaj platformę' : 'Edytuj platformę' }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/admin-panel.css') }}">
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <div class="topbar">
+        PLUSFLIX: {{ action == 'add' ? 'Dodawanie nowej platformy' : 'Edycja platformy' }}
+    </div>
+
+    <div class="form-container">
+        <div class="form-header">
+            {{ action == 'add' ? 'DODAJ NOWĄ PLATFORMĘ' : 'EDYTUJ PLATFORMĘ' }}
+        </div>
+
+        {% if action == 'edit' %}
+            <div class="form-info">
+                Edytujesz platformę o ID: {{ id }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label class="form-label" for="name">Nazwa platformy *</label>
+                <input class="form-input" type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="websiteUrl">Adres URL strony</label>
+                <input class="form-input" type="url" id="websiteUrl" name="websiteUrl">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="banner">URL banera/logo</label>
+                <input class="form-input" type="text" id="banner" name="banner">
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ path('admin_main_panel') }}" class="form-button secondary">Anuluj</a>
+                <button type="submit" class="form-button primary">Zapisz</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -23,8 +23,9 @@
 
     <div class="util-list">
         <div class="buttons-container">
-            <button class="util-button">DODAJ</button>
-            <button class="util-button">USUŃ</button>
+            <button class="util-button" id="add-button">DODAJ</button>
+            <button class="util-button" id="edit-button">EDYTUJ</button>
+            <button class="util-button" id="delete-button">USUŃ</button>
         </div>
 
         <div class="search-container">
@@ -39,7 +40,7 @@
         <ul class="item-list">
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-1" />
+                    <input type="checkbox" id="checkbox-1" data-id="1" />
                     <label for="checkbox-1"></label>
                 </div>
                 <div>
@@ -48,7 +49,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-2" />
+                    <input type="checkbox" id="checkbox-2" data-id="2" />
                     <label for="checkbox-2"></label>
                 </div>
                 <div>
@@ -57,7 +58,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-3" />
+                    <input type="checkbox" id="checkbox-3" data-id="3" />
                     <label for="checkbox-3"></label>
                 </div>
                 <div>
@@ -66,7 +67,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-4" />
+                    <input type="checkbox" id="checkbox-4" data-id="4" />
                     <label for="checkbox-4"></label>
                 </div>
                 <div>
@@ -75,7 +76,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-5" />
+                    <input type="checkbox" id="checkbox-5" data-id="5" />
                     <label for="checkbox-5"></label>
                 </div>
                 <div>
@@ -84,7 +85,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-6" />
+                    <input type="checkbox" id="checkbox-6" data-id="6" />
                     <label for="checkbox-6"></label>
                 </div>
                 <div>
@@ -93,7 +94,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-7" />
+                    <input type="checkbox" id="checkbox-7" data-id="7" />
                     <label for="checkbox-7"></label>
                 </div>
                 <div>
@@ -107,7 +108,7 @@
         <ul class="item-list">
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-11" />
+                    <input type="checkbox" id="checkbox-11" data-id="1" />
                     <label for="checkbox-11"></label>
                 </div>
                 <div>
@@ -116,7 +117,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-22" />
+                    <input type="checkbox" id="checkbox-22" data-id="2" />
                     <label for="checkbox-22"></label>
                 </div>
                 <div>
@@ -125,7 +126,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-33" />
+                    <input type="checkbox" id="checkbox-33" data-id="3" />
                     <label for="checkbox-33"></label>
                 </div>
                 <div>
@@ -134,7 +135,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-44" />
+                    <input type="checkbox" id="checkbox-44" data-id="4" />
                     <label for="checkbox-44"></label>
                 </div>
                 <div>
@@ -149,22 +150,102 @@
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".tab-button");
         const tabs = document.querySelectorAll(".tab-content");
+        const addButton = document.getElementById('add-button');
+        const editButton = document.getElementById('edit-button');
+        const deleteButton = document.getElementById('delete-button');
+
+        let currentTab = 'films';
+        let selectedItemId = null;
 
         buttons.forEach(button => {
-            button.addEventListener("click", () => {
+            button.addEventListener("click", () =>
+            {
                 const tabId = button.dataset.tab;
+                currentTab = tabId;
 
                 buttons.forEach(b => b.classList.remove("active"));
                 button.classList.add("active");
 
-                tabs.forEach(tab => {
+                tabs.forEach(tab =>
+                {
                     tab.classList.toggle("hidden", tab.id !== tabId);
+                });
+
+                selectedItemId = null;
+                document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(cb =>
+                {
+                    cb.checked = false;
                 });
             });
         });
+
+        document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(checkbox =>
+        {
+            checkbox.addEventListener('change', (e) =>
+            {
+                if (e.target.checked)
+                {
+                    document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(cb =>
+                    {
+                        if (cb !== e.target) cb.checked = false;
+                    });
+
+                    selectedItemId = e.target.dataset.id;
+                }
+                else
+                {
+                    selectedItemId = null;
+                }
+            });
+        });
+
+        // Dodawanie
+        addButton.addEventListener('click', () =>
+        {
+            if (currentTab === 'films')
+            {
+                window.location.href = '{{ path("admin_movie_add") }}';
+            }
+            else if (currentTab === 'platforms')
+            {
+                window.location.href = '{{ path("admin_platform_add") }}';
+            }
+        });
+
+        // Edycja
+        editButton.addEventListener('click', () =>
+        {
+            if (!selectedItemId)
+            {
+                alert('Proszę wybrać element do edycji');
+                return;
+            }
+
+            if (currentTab === 'films')
+            {
+                window.location.href = `/admin/movie/edit/${selectedItemId}`;
+            }
+            else if (currentTab === 'platforms')
+            {
+                window.location.href = `/admin/platform/edit/${selectedItemId}`;
+            }
+        });
+
+        // Usuwanie
+        deleteButton.addEventListener('click', () =>
+        {
+            if (!selectedItemId)
+            {
+                alert('Proszę wybrać element do usunięcia');
+                return;
+            }
+
+            if (confirm('Czy na pewno chcesz usunąć wybrany element?'))
+            {
+                // dodac usuwanie
+            }
+        });
     });
 </script>
-
 </body>
 </html>
-
