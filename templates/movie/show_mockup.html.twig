@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/movie-show.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            {% include 'movie/banner.html.twig' %}
+        </header>
+        <a href="{{ path('app_home') }}">
+            <img id="return_button" src="{{ asset('images/return_arrow.png') }}" alt="return_button">
+        </a>
+        <div id="content">
+            <div id="left_data">
+                <div id="banner"></div>
+                <div id="rating">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <p id="rating_mean">(1)</p>
+                </div>
+            </div>
+
+            <div id="right_data">
+                <div id="title_contents">
+                    <div id="title_box">{{ movie.title }}</div>
+                    <img id="heart_icon" src="{{ asset('images/empty_heart.svg') }}">
+                </div>
+                <div id="description">Genialny, ale egoistyczny naukowiec Wiktor Frankenstein usiłuje  rozwikłać zagadkę śmierci. Odkrywa możliwość stworzenia życia w martwym  ciele, lecz zamiast ideału powstaje inteligentne, wykazujące ludzkie  odruchy monstrum. Efekt tego potwornego eksperymentu ostatecznie  prowadzi do zguby zarówno twórcy, jak i jego tragicznego dzieła.</div>
+                <div id="properties_list">
+                    <div class="movie_property">Gatunek: <p class="movie_property_value">Horror</p></div>
+                    <div class="movie_property">Data premiery: <p class="movie_property_value">2020</p></div>
+                    <div class="movie_property">Kraj produkcji: <p class="movie_property_value">Stany zjednoczone</p></div>
+                    <div class="movie_property">Reżyser: <p class="movie_property_value">Edward Dzban</p></div>
+                    <div class="movie_property">Scenarzysta: <p class="movie_property_value">Nina Wazon</p></div>
+                </div>
+            </div>
+
+        </div>
+        <div id="platforms_list">
+            <div class="platform">
+                <div class="platform_baner"></div>
+                <button class="platform_button">Zobacz teraz</button>
+            </div>
+            <div class="platform">
+                <div class="platform_baner"></div>
+                <button class="platform_button">Zobacz teraz</button>
+            </div>
+        </div>
+
+
+        <script>
+            const stars = document.querySelectorAll("#rating .star");
+
+            const emptyStar = "{{ asset('images/empty_star.svg') }}";
+            const clickedStar = "{{ asset('images/clicked_star.svg') }}";
+
+            stars.forEach((star, index) => {
+                star.addEventListener("click", () => {
+
+                    stars.forEach((s, i) => {
+                        s.src = i <= index ? clickedStar : emptyStar;
+                    });
+
+                });
+            });
+
+            const heart = document.getElementById("heart_icon");
+
+            const emptyHeart = "{{ asset('images/empty_heart.svg') }}";
+            const clickedHeart = "{{ asset('images/clicked_heart.svg') }}";
+
+            heart.addEventListener("click", () => {
+                heart.src = heart.src.includes("empty_heart.svg")
+                    ? clickedHeart
+                    : emptyHeart;
+            });
+        </script>
+    </body>
+</html>
+
+
+
