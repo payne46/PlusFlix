@@ -43,10 +43,10 @@ class MovieController extends AbstractController
             ]);
         } 
 
-        return $this->render('movie/index.html.twig', [
+        return $this->render('movie/index_mockup.html.twig', [
             'movies'        => $movies,
             'topMovies'     => $topMovies,
-            'streamingPlatforms'     => $streamingPlatforms
+            'streamingPlatforms'     => $streamingPlatforms,
         ]);
     }
 

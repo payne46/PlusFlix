@@ -1,0 +1,19 @@
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9.7vh;
+    width: 100%;
+    background: linear-gradient(to right, #0065A3, #070707);
+    color: #0D9CFF;
+}
+
+.banner-text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.banner-text p {
+    font-size: 28px;
+}
