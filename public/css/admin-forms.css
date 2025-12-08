@@ -1,0 +1,131 @@
+body {
+    background: white;
+    font-family: Inter, sans-serif;
+    margin: 0;
+}
+
+.topbar {
+    background: #D9D9D9;
+    padding: 25px 0;
+    font-size: 32px;
+    text-align: center;
+}
+
+.form-container {
+    width: 90%;
+    margin: 20px auto;
+    background: #D9D9D9;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+.form-header {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #000;
+    text-align: center;
+}
+
+.form-info {
+    background: #bbb;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #000;
+    font-size: 24px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 24px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 24px;
+    min-height: 150px;
+    resize: vertical;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.form-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #bbb;
+}
+
+.form-button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    background-color: #D9D9D9;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 32px;
+    text-decoration: none !important;
+    display: inline-block;
+    border: 2px solid #000;
+}
+
+.form-button:hover {
+    background-color: #bbb;
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+.form-button.secondary {
+    background-color: #D9D9D9;
+}
+
+.form-button.primary {
+    background-color: #D9D9D9;
+}
+
+.form-button.primary:hover {
+    background-color: #bbb;
+}
+
+.form-actions a {
+    text-decoration: none !important;
+}
+
+.form-actions a.form-button {
+    color: #000 !important;
+}
