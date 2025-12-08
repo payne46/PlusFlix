@@ -70,7 +70,10 @@ header{
 
 #heart_icon{
     height:  2.75rem ;
-    width:  3.00rem ;
+    min-width:  3.00rem ;
+    float:right;
+    margin-top:0.5vh;
+    margin-right:0.5vh;
 }
 
 #description{
@@ -80,6 +83,8 @@ header{
     font-family: "Lato", sans-serif;
     font-weight: 300;
     font-style: normal;
+    text-justify: auto;
+    text-align: justify;
 }
 
 #properties_list{
@@ -177,10 +182,6 @@ header{
 }
 @media (max-width: 768px) {
 
-    header {
-        height: 6.71vh;
-    }
-
     #return_button {
         margin-top: 2vh;
         margin-left: 5.83vw;
@@ -203,7 +204,7 @@ header{
     }
 
     #title_box {
-        font-size: 1.4rem;
+        font-size: 2rem;
         width: auto;
         text-align: center;
         justify-content: center;
