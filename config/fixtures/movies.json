@@ -1,0 +1,582 @@
+[
+  {
+    "title": "Pulp Fiction",
+    "description": "Crime film directed by Quentin Tarantino, intertwining multiple storylines in Los Angeles with a lot of talking and even more bullets.",
+    "releaseDate": "1994-10-14",
+    "director": "Quentin Tarantino",
+    "screenwriter": "Quentin Tarantino; Roger Avary",
+    "genre": "Crime",
+    "length": 154,
+    "country": "USA"
+  },
+  {
+    "title": "Reservoir Dogs",
+    "description": "Tarantino debut about a botched diamond heist, sharp suits, sharp dialogue and very unsafe ear conditions.",
+    "releaseDate": "1992-10-23",
+    "director": "Quentin Tarantino",
+    "screenwriter": "Quentin Tarantino",
+    "genre": "Crime",
+    "length": 99,
+    "country": "USA"
+  },
+  {
+    "title": "The Hateful Eight",
+    "description": "Western mystery where eight strangers hide from a blizzard and slowly prove that cabin sharing is a terrible idea.",
+    "releaseDate": "2015-12-25",
+    "director": "Quentin Tarantino",
+    "screenwriter": "Quentin Tarantino",
+    "genre": "Western",
+    "length": 168,
+    "country": "USA"
+  },
+  {
+    "title": "The Godfather",
+    "description": "Classic crime saga about the Corleone family, business offers you really cannot refuse and a suspicious amount of oranges.",
+    "releaseDate": "1972-03-24",
+    "director": "Francis Ford Coppola",
+    "screenwriter": "Mario Puzo; Francis Ford Coppola",
+    "genre": "Crime",
+    "length": 175,
+    "country": "USA"
+  },
+  {
+    "title": "The Green Mile",
+    "description": "Prison drama with miracles, a very large inmate, a very small mouse and emotions that should come with a tissue warning.",
+    "releaseDate": "1999-12-10",
+    "director": "Frank Darabont",
+    "screenwriter": "Frank Darabont; Stephen King",
+    "genre": "Drama",
+    "length": 189,
+    "country": "USA"
+  },
+  {
+    "title": "The Shawshank Redemption",
+    "description": "Hope, friendship and a lot of rock hammer patience in one of the most beloved prison escape stories ever filmed.",
+    "releaseDate": "1994-09-23",
+    "director": "Frank Darabont",
+    "screenwriter": "Frank Darabont; Stephen King",
+    "genre": "Drama",
+    "length": 142,
+    "country": "USA"
+  },
+  {
+    "title": "Forrest Gump",
+    "description": "Life is like a box of chocolates and Forrest somehow runs through half of American history in one go.",
+    "releaseDate": "1994-07-06",
+    "director": "Robert Zemeckis",
+    "screenwriter": "Eric Roth; Winston Groom",
+    "genre": "Drama",
+    "length": 142,
+    "country": "USA"
+  },
+  {
+    "title": "Requiem for a Dream",
+    "description": "Stylish but brutal descent into addiction that will convince you to treat all life choices with a bit more respect.",
+    "releaseDate": "2000-10-27",
+    "director": "Darren Aronofsky",
+    "screenwriter": "Hubert Selby Jr.; Darren Aronofsky",
+    "genre": "Drama",
+    "length": 102,
+    "country": "USA"
+  },
+  {
+    "title": "The Matrix",
+    "description": "Hacker discovers reality is fake, physics is optional and sunglasses are mandatory even at night.",
+    "releaseDate": "1999-03-31",
+    "director": "Lana Wachowski; Lilly Wachowski",
+    "screenwriter": "Lana Wachowski; Lilly Wachowski",
+    "genre": "Sci-Fi",
+    "length": 136,
+    "country": "USA"
+  },
+  {
+    "title": "The Silence of the Lambs",
+    "description": "A young FBI trainee, a brilliant cannibal and a reminder to never accept dinner invitations from certain doctors.",
+    "releaseDate": "1991-02-14",
+    "director": "Jonathan Demme",
+    "screenwriter": "Ted Tally; Thomas Harris",
+    "genre": "Thriller",
+    "length": 118,
+    "country": "USA"
+  },
+  {
+    "title": "Avatar",
+    "description": "Marine gets a very blue new body, discovers nature, flying dragons and that corporations are not great neighbors.",
+    "releaseDate": "2009-12-18",
+    "director": "James Cameron",
+    "screenwriter": "James Cameron",
+    "genre": "Sci-Fi",
+    "length": 162,
+    "country": "USA"
+  },
+  {
+    "title": "Gladiator",
+    "description": "Roman general becomes a gladiator, wins crowds, swings swords and politely asks if everyone is entertained.",
+    "releaseDate": "2000-05-05",
+    "director": "Ridley Scott",
+    "screenwriter": "David Franzoni; John Logan; William Nicholson",
+    "genre": "Action",
+    "length": 155,
+    "country": "USA"
+  },
+  {
+    "title": "Shrek",
+    "description": "A grumpy ogre, a talkative donkey and a princess prove that fairy tales can also smell like swamp.",
+    "releaseDate": "2001-05-18",
+    "director": "Andrew Adamson; Vicky Jenson",
+    "screenwriter": "Ted Elliott; Terry Rossio; Joe Stillman; Roger S.H. Schulman",
+    "genre": "Animation",
+    "length": 90,
+    "country": "USA"
+  },
+  {
+    "title": "Titanic",
+    "description": "Epic romance on an unsinkable ship that famously did not read the marketing materials carefully enough.",
+    "releaseDate": "1997-12-19",
+    "director": "James Cameron",
+    "screenwriter": "James Cameron",
+    "genre": "Romance",
+    "length": 195,
+    "country": "USA"
+  },
+  {
+    "title": "Shutter Island",
+    "description": "US marshal investigates a missing patient on an isolated island where nothing is quite what it seems.",
+    "releaseDate": "2010-02-19",
+    "director": "Martin Scorsese",
+    "screenwriter": "Laeta Kalogridis; Dennis Lehane",
+    "genre": "Thriller",
+    "length": 138,
+    "country": "USA"
+  },
+  {
+    "title": "Inglourious Basterds",
+    "description": "Alternate WWII where cinema, revenge and Tarantino dialogue team up against Nazis in very explosive ways.",
+    "releaseDate": "2009-08-21",
+    "director": "Quentin Tarantino",
+    "screenwriter": "Quentin Tarantino",
+    "genre": "War",
+    "length": 153,
+    "country": "USA"
+  },
+  {
+    "title": "One Flew Over the Cuckoo's Nest",
+    "description": "Charismatic troublemaker shakes up a mental institution and proves that rebellion can be very expensive.",
+    "releaseDate": "1975-11-19",
+    "director": "Milos Forman",
+    "screenwriter": "Bo Goldman; Lawrence Hauben; Ken Kesey",
+    "genre": "Drama",
+    "length": 133,
+    "country": "USA"
+  },
+  {
+    "title": "The Butterfly Effect",
+    "description": "Man revisits his past, changes tiny details and learns that debugging timelines is harder than debugging code.",
+    "releaseDate": "2004-01-23",
+    "director": "Eric Bress; J. Mackye Gruber",
+    "screenwriter": "Eric Bress; J. Mackye Gruber",
+    "genre": "Sci-Fi",
+    "length": 113,
+    "country": "USA"
+  },
+  {
+    "title": "Gran Torino",
+    "description": "Grumpy veteran, noisy neighbors and one classic car in a story that slowly swaps anger for understanding.",
+    "releaseDate": "2009-01-09",
+    "director": "Clint Eastwood",
+    "screenwriter": "Nick Schenk; Dave Johannson",
+    "genre": "Drama",
+    "length": 116,
+    "country": "USA"
+  },
+  {
+    "title": "The Dark Knight",
+    "description": "Batman faces the Joker, moral chaos and serious voice filter issues in one of the most praised superhero films.",
+    "releaseDate": "2008-07-18",
+    "director": "Christopher Nolan",
+    "screenwriter": "Jonathan Nolan; Christopher Nolan; David S. Goyer",
+    "genre": "Action",
+    "length": 152,
+    "country": "USA"
+  },
+  {
+    "title": "Fight Club",
+    "description": "An insomniac office worker forms an underground fight club that evolves into something much more destructive.",
+    "releaseDate": "1999-10-15",
+    "director": "David Fincher",
+    "screenwriter": "Jim Uhls; Chuck Palahniuk",
+    "genre": "Drama",
+    "length": 139,
+    "country": "USA"
+  },
+  {
+    "title": "Inception",
+    "description": "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea.",
+    "releaseDate": "2010-07-16",
+    "director": "Christopher Nolan",
+    "screenwriter": "Christopher Nolan",
+    "genre": "Sci-Fi",
+    "length": 148,
+    "country": "USA"
+  },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "description": "A meek Hobbit and eight companions set out on a journey to destroy the One Ring and save Middle-earth.",
+    "releaseDate": "2001-12-19",
+    "director": "Peter Jackson",
+    "screenwriter": "Fran Walsh; Philippa Boyens; Peter Jackson; J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "length": 178,
+    "country": "New Zealand"
+  },
+  {
+    "title": "Star Wars: Episode V - The Empire Strikes Back",
+    "description": "After the Rebels are brutally overpowered by the Empire, Luke Skywalker begins Jedi training with Yoda.",
+    "releaseDate": "1980-05-21",
+    "director": "Irvin Kershner",
+    "screenwriter": "Leigh Brackett; Lawrence Kasdan; George Lucas",
+    "genre": "Sci-Fi",
+    "length": 124,
+    "country": "USA"
+  },
+  {
+    "title": "Interstellar",
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "releaseDate": "2014-11-07",
+    "director": "Christopher Nolan",
+    "screenwriter": "Jonathan Nolan; Christopher Nolan",
+    "genre": "Sci-Fi",
+    "length": 169,
+    "country": "USA"
+  },
+  {
+    "title": "Parasite",
+    "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    "releaseDate": "2019-05-30",
+    "director": "Bong Joon Ho",
+    "screenwriter": "Bong Joon Ho; Han Jin-won",
+    "genre": "Thriller",
+    "length": 132,
+    "country": "South Korea"
+  },
+  {
+    "title": "The Wolf of Wall Street",
+    "description": "Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker to his fall involving crime and corruption.",
+    "releaseDate": "2013-12-25",
+    "director": "Martin Scorsese",
+    "screenwriter": "Terence Winter; Jordan Belfort",
+    "genre": "Biography",
+    "length": 180,
+    "country": "USA"
+  },
+  {
+    "title": "Goodfellas",
+    "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen and his mob partners.",
+    "releaseDate": "1990-09-19",
+    "director": "Martin Scorsese",
+    "screenwriter": "Nicholas Pileggi; Martin Scorsese",
+    "genre": "Biography",
+    "length": 146,
+    "country": "USA"
+  },
+  {
+    "title": "Se7en",
+    "description": "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
+    "releaseDate": "1995-09-22",
+    "director": "David Fincher",
+    "screenwriter": "Andrew Kevin Walker",
+    "genre": "Crime",
+    "length": 127,
+    "country": "USA"
+  },
+  {
+    "title": "The Prestige",
+    "description": "After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have.",
+    "releaseDate": "2006-10-20",
+    "director": "Christopher Nolan",
+    "screenwriter": "Jonathan Nolan; Christopher Nolan; Christopher Priest",
+    "genre": "Drama",
+    "length": 130,
+    "country": "USA"
+  },
+  {
+    "title": "Jurassic Park",
+    "description": "A pragmatic paleontologist visiting an almost complete theme park is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    "releaseDate": "1993-06-11",
+    "director": "Steven Spielberg",
+    "screenwriter": "Michael Crichton; David Koepp",
+    "genre": "Adventure",
+    "length": 127,
+    "country": "USA"
+  },
+  {
+    "title": "Back to the Future",
+    "description": "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.",
+    "releaseDate": "1985-07-03",
+    "director": "Robert Zemeckis",
+    "screenwriter": "Robert Zemeckis; Bob Gale",
+    "genre": "Adventure",
+    "length": 116,
+    "country": "USA"
+  },
+  {
+    "title": "The Lion King",
+    "description": "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.",
+    "releaseDate": "1994-06-24",
+    "director": "Roger Allers; Rob Minkoff",
+    "screenwriter": "Irene Mecchi; Jonathan Roberts; Linda Woolverton",
+    "genre": "Animation",
+    "length": 88,
+    "country": "USA"
+  },
+  {
+    "title": "Casablanca",
+    "description": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.",
+    "releaseDate": "1943-01-23",
+    "director": "Michael Curtiz",
+    "screenwriter": "Julius J. Epstein; Philip G. Epstein; Howard Koch",
+    "genre": "Drama",
+    "length": 102,
+    "country": "USA"
+  },
+  {
+    "title": "Psycho",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run, and checks into a remote motel run by a young man under the domination of his mother.",
+    "releaseDate": "1960-09-08",
+    "director": "Alfred Hitchcock",
+    "screenwriter": "Joseph Stefano; Robert Bloch",
+    "genre": "Horror",
+    "length": 109,
+    "country": "USA"
+  },
+  {
+    "title": "La La Land",
+    "description": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.",
+    "releaseDate": "2016-12-09",
+    "director": "Damien Chazelle",
+    "screenwriter": "Damien Chazelle",
+    "genre": "Musical",
+    "length": 128,
+    "country": "USA"
+  },
+  {
+    "title": "The Terminator",
+    "description": "A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine, sent from the same year, which has been programmed to execute a young woman whose unborn son is the key to humanity's future salvation.",
+    "releaseDate": "1984-10-26",
+    "director": "James Cameron",
+    "screenwriter": "James Cameron; Gale Anne Hurd",
+    "genre": "Sci-Fi",
+    "length": 107,
+    "country": "USA"
+  },
+  {
+    "title": "Star Wars: Episode III - Revenge of the Sith",
+    "description": "The dark side clouds everything as Anakin Skywalker succumbs to his fears and hatred, completing his transformation into Darth Vader.",
+    "releaseDate": "2005-05-19",
+    "director": "George Lucas",
+    "screenwriter": "George Lucas",
+    "genre": "Sci-Fi",
+    "length": 140,
+    "country": "USA"
+  },
+  {
+    "title": "Transformers",
+    "description": "A teenager discovers his car is actually an alien robot, sparking an ancient war between Autobots and Decepticons on Earth.",
+    "releaseDate": "2007-07-03",
+    "director": "Michael Bay",
+    "screenwriter": "Roberto Orci; Alex Kurtzman; John Rogers",
+    "genre": "Action",
+    "length": 144,
+    "country": "USA"
+  },
+  {
+    "title": "The Avengers",
+    "description": "Earth's mightiest heroes must come together to stop Loki and his alien army from enslaving humanity.",
+    "releaseDate": "2012-05-04",
+    "director": "Joss Whedon",
+    "screenwriter": "Joss Whedon; Zak Penn",
+    "genre": "Action",
+    "length": 143,
+    "country": "USA"
+  },
+  {
+    "title": "The Social Network",
+    "description": "The story of how Facebook was created, filled with brilliant coding, betrayal, lawsuits, and changing how the world connects.",
+    "releaseDate": "2010-10-01",
+    "director": "David Fincher",
+    "screenwriter": "Aaron Sorkin; Ben Mezrich",
+    "genre": "Biography",
+    "length": 120,
+    "country": "USA"
+  },
+  {
+    "title": "Dunkirk",
+    "description": "Allied soldiers from Belgium, Britain, and France are surrounded by the German army during WWII and must be evacuated in a desperate battle for survival.",
+    "releaseDate": "2017-07-21",
+    "director": "Christopher Nolan",
+    "screenwriter": "Christopher Nolan",
+    "genre": "War",
+    "length": 106,
+    "country": "UK"
+  },
+  {
+    "title": "Toy Story",
+    "description": "A cowboy doll is profoundly threatened and jealous when a new spaceman action figure supplants him as top toy in a boy's bedroom.",
+    "releaseDate": "1995-11-22",
+    "director": "John Lasseter",
+    "screenwriter": "John Lasseter; Pete Docter; Andrew Stanton; Joe Ranft",
+    "genre": "Animation",
+    "length": 81,
+    "country": "USA"
+  },
+  {
+    "title": "The Departed",
+    "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.",
+    "releaseDate": "2006-10-06",
+    "director": "Martin Scorsese",
+    "screenwriter": "William Monahan; Alan Mak; Felix Chong",
+    "genre": "Crime",
+    "length": 151,
+    "country": "USA"
+  },
+  {
+    "title": "Whiplash",
+    "description": "A promising young drummer enrolls at a cutthroat music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing to realize a student's potential.",
+    "releaseDate": "2014-10-15",
+    "director": "Damien Chazelle",
+    "screenwriter": "Damien Chazelle",
+    "genre": "Drama",
+    "length": 106,
+    "country": "USA"
+  },
+  {
+    "title": "Get Out",
+    "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+    "releaseDate": "2017-02-24",
+    "director": "Jordan Peele",
+    "screenwriter": "Jordan Peele",
+    "genre": "Horror",
+    "length": 104,
+    "country": "USA"
+  },
+  {
+    "title": "Mad Max: Fury Road",
+    "description": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search of her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.",
+    "releaseDate": "2015-05-15",
+    "director": "George Miller",
+    "screenwriter": "George Miller; Brendan McCarthy; Nick Lathouris",
+    "genre": "Action",
+    "length": 120,
+    "country": "Australia"
+  },
+  {
+    "title": "Blade Runner 2049",
+    "description": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
+    "releaseDate": "2017-10-06",
+    "director": "Denis Villeneuve",
+    "screenwriter": "Hampton Fancher; Michael Green; Philip K. Dick",
+    "genre": "Sci-Fi",
+    "length": 164,
+    "country": "USA"
+  },
+  {
+    "title": "Spider-Man: Into the Spider-Verse",
+    "description": "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat to all reality.",
+    "releaseDate": "2018-12-14",
+    "director": "Bob Persichetti; Peter Ramsey; Rodney Rothman",
+    "screenwriter": "Phil Lord; Rodney Rothman",
+    "genre": "Animation",
+    "length": 117,
+    "country": "USA"
+  },
+  {
+    "title": "The Grand Budapest Hotel",
+    "description": "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+    "releaseDate": "2014-03-28",
+    "director": "Wes Anderson",
+    "screenwriter": "Wes Anderson; Hugo Guinness",
+    "genre": "Comedy",
+    "length": 99,
+    "country": "USA"
+  },
+  {
+    "title": "Harry Potter and the Philosopher's Stone",
+    "description": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+    "releaseDate": "2001-11-16",
+    "director": "Chris Columbus",
+    "screenwriter": "Steve Kloves; J.K. Rowling",
+    "genre": "Fantasy",
+    "length": 152,
+    "country": "UK"
+  },
+  {
+    "title": "Joker",
+    "description": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime.",
+    "releaseDate": "2019-10-04",
+    "director": "Todd Phillips",
+    "screenwriter": "Todd Phillips; Scott Silver",
+    "genre": "Crime",
+    "length": 122,
+    "country": "USA"
+  },
+  {
+    "title": "The Big Lebowski",
+    "description": "Jeff \"The Dude\" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.",
+    "releaseDate": "1998-03-06",
+    "director": "Joel Coen; Ethan Coen",
+    "screenwriter": "Ethan Coen; Joel Coen",
+    "genre": "Comedy",
+    "length": 117,
+    "country": "USA"
+  },
+  {
+    "title": "Blade Runner",
+    "description": "A blade runner must pursue and terminate four replicants who stole a ship in space and have returned to Earth to find their creator.",
+    "releaseDate": "1982-06-25",
+    "director": "Ridley Scott",
+    "screenwriter": "Hampton Fancher; David Peoples; Philip K. Dick",
+    "genre": "Sci-Fi",
+    "length": 117,
+    "country": "USA"
+  },
+  {
+    "title": "Kill Bill: Vol. 1",
+    "description": "After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her.",
+    "releaseDate": "2003-10-10",
+    "director": "Quentin Tarantino",
+    "screenwriter": "Quentin Tarantino",
+    "genre": "Action",
+    "length": 111,
+    "country": "USA"
+  },
+  {
+    "title": "12 Angry Men",
+    "description": "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.",
+    "releaseDate": "1957-04-10",
+    "director": "Sidney Lumet",
+    "screenwriter": "Reginald Rose",
+    "genre": "Drama",
+    "length": 96,
+    "country": "USA"
+  },
+  {
+    "title": "The Thing",
+    "description": "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
+    "releaseDate": "1982-06-25",
+    "director": "John Carpenter",
+    "screenwriter": "Bill Lancaster; John W. Campbell Jr.",
+    "genre": "Horror",
+    "length": 109,
+    "country": "USA"
+  },
+  {
+    "title": "Mission: Impossible - Fallout",
+    "description": "Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.",
+    "releaseDate": "2018-07-27",
+    "director": "Christopher McQuarrie",
+    "screenwriter": "Christopher McQuarrie",
+    "genre": "Action",
+    "length": 147,
+    "country": "USA"
+  }
+]

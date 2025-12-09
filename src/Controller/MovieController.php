@@ -15,38 +15,44 @@ class MovieController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(
-        Request $request,
-        MovieRepository $movieRepository,
-        StreamingPlatformRepository $streamingPlatformRepository): Response
+    Request $request,
+    MovieRepository $movieRepository,
+    StreamingPlatformRepository $streamingPlatformRepository): Response
     {
-        // Get query string
-        $query = $request->query->get('q');
+        $phrase = $request->query->get('phrase');
+        $categoriesString = $request->query->get('categories');
 
-        // Get all movies
-        $movies = $movieRepository->findAll();
+        $phrase = ($phrase !== null && $phrase !== '') 
+            ? $phrase 
+            : null;
 
-        // Get top movies
-        $topMovies = $movieRepository->getTopMovies(3);
+        $categoriesString = ($categoriesString !== null && $categoriesString !== '') 
+            ? $categoriesString 
+            : null;
 
-        // Get streaming platforms
-        $streamingPlatforms = $streamingPlatformRepository->findAll();
+        $categoriesArray = [];
+        if ($categoriesString !== null) {
+            $categoriesArray = array_filter(
+                array_map('trim', explode(';', $categoriesString)),
+                static fn ($v) => $v !== ''
+            );
+        }
 
-        if ($query) {
-
-            $serachResults = $movieRepository->search($query);
+        if ($phrase !== null || !empty($categoriesArray)) {
+            $searchResults = $movieRepository->search($phrase, $categoriesArray);
 
             return $this->render('movie/index.html.twig', [
-                'movies'             => $movies,
-                'topMovies'          => $topMovies,
-                'streamingPlatforms' => $streamingPlatforms,
-                'searchResults'      => $serachResults
+                'searchResults'      => $searchResults,
+                'currentPhrase'      => $phrase,
+                'currentCategories'  => $categoriesArray,
+                'categoriesString'   => $categoriesString,
             ]);
         }
 
-        return $this->render('movie/index_mockup.html.twig', [
-            'movies'        => $movies,
-            'topMovies'     => $topMovies,
-            'streamingPlatforms'     => $streamingPlatforms,
+        $movies = $movieRepository->findAll();
+
+        return $this->render('movie/index.html.twig', [
+            'movies' => $movies
         ]);
     }
 
@@ -59,7 +65,7 @@ class MovieController extends AbstractController
             throw $this->createNotFoundException('Film o podanym ID nie istnieje.');
         }
 
-        return $this->render('movie/show_mockup.html.twig', [
+        return $this->render('movie/show.html.twig', [
             'movie' => $movie,
         ]);
     }
