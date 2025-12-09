@@ -29,59 +29,59 @@
         <form method="POST">
             <div class="form-group">
                 <label class="form-label" for="title">Tytuł *</label>
-                <input class="form-input" type="text" id="title" name="title" required>
+                <input class="form-input" type="text" id="title" name="title" {% if action == 'edit' %}value="{{ movie.title }}"{% endif %} required>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="description">Opis</label>
-                <textarea class="form-textarea" id="description" name="description"></textarea>
+                <textarea class="form-textarea" id="description" name="description">{% if action == 'edit' %}{{ movie.description }}{% endif %}</textarea>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="director">Reżyser</label>
-                    <input class="form-input" type="text" id="director" name="director">
+                    <input class="form-input" type="text" id="director" name="director" {% if action == 'edit' %}value="{{ movie.director }}"{% endif %}>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="screenwriter">Scenarzysta</label>
-                    <input class="form-input" type="text" id="screenwriter" name="screenwriter">
+                    <input class="form-input" type="text" id="screenwriter" name="screenwriter" {% if action == 'edit' %}value="{{ movie.screenwriter }}"{% endif %}>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="genre">Gatunek</label>
-                    <input class="form-input" type="text" id="genre" name="genre">
+                    <input class="form-input" type="text" id="genre" name="genre" {% if action == 'edit' %}value="{{ movie.genre }}"{% endif %}>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="country">Kraj</label>
-                    <input class="form-input" type="text" id="country" name="country">
+                    <input class="form-input" type="text" id="country" name="country" {% if action == 'edit' %}value="{{ movie.country }}"{% endif %}>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="releaseDate">Data premiery</label>
-                    <input class="form-input" type="date" id="releaseDate" name="releaseDate">
+                    <input class="form-input" type="date" id="releaseDate" name="releaseDate" {% if action == 'edit' %}value="{{ movie.releaseDate|date('Y-m-d') }}"{% endif %}>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="length">Długość (minuty)</label>
-                    <input class="form-input" type="number" id="length" name="length">
+                    <input class="form-input" type="number" id="length" name="length" {% if action == 'edit' %}value="{{ movie.length }}"{% endif %}>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="rating">Ocena</label>
-                    <input class="form-input" type="number" step="0.1" min="0" max="5" id="rating" name="rating">
+                    <input class="form-input" type="number" step="0.1" min="0" max="5" id="rating" name="rating" {% if action == 'edit' %}value="{{ movie.rating }}"{% endif %}>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="banner">URL banera</label>
-                    <input class="form-input" type="text" id="banner" name="banner">
+                    <input class="form-input" type="text" id="banner" name="banner" {% if action == 'edit' %}value="{{ movie.banner }}"{% endif %}>
                 </div>
             </div>
 
