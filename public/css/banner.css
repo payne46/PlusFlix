@@ -17,3 +17,10 @@
 .banner-text p {
     font-size: 28px;
 }
+
+
+@media (max-width: 768px) {
+    .banner-text p {
+        display: none;
+    }
+}

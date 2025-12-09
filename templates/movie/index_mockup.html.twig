@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}PlusFlix - main{% endblock %}</title>
 
     {% block stylesheets %}
@@ -32,67 +34,42 @@
                     <button class="normal-button">THRILLER</button>
                     <button class="normal-button last-button">PRZYGODOWY</button>
                 </div>
+
                 <div class="small-buttons">
-                    <button id="test" class="small-button" id="favourite-button">
+                    <div class="custom-select-wrapper categories-mobile" id="categories-select-wrapper">
+                        <div class="custom-select" id="categories-select">
+                            Kategoria
+                            <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+                        </div>
+                        <div class="custom-options">
+                          <div data-value="comedy">KOMEDIA</div>
+                          <div data-value="drama">DRAMAT</div>
+                          <div data-value="horror">HORROR</div>
+                          <div data-value="sci-fi">SCI-FI</div>
+                          <div data-value="action">AKCJA</div>
+                          <div data-value="thriller">THRILLER</div>
+                          <div data-value="adventure">PRZYGODOWY</div>
+                        </div>
+                    </div>
+
+
+                    <button class="special-button" id="favourite-button">
                         <img src="{{ asset('images/favorite.svg') }}" alt="favourite movies button">
                     </button>
-                    <button class="small-button" id="clear-button">
+                    <button class="special-button" id="clear-button">
                         <img src="{{ asset('images/mop.svg') }}" alt="clear options button">
                     </button>
                 </div>
             </div>
 
-            <div class="custom-select-wrapper">
-                <div class="custom-select">
+            <!-- sort -->
+            <div class="custom-select-wrapper" id="sort-select-wrapper">
+                <div id="sort-select" class="custom-select">
                     Sortowanie
-                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}" alt="arrow down">
-                </svg>
+                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
                 </div>
                 <div class="custom-options">
-                  <div data-value="default">DEFAULT</div>
                   <div data-value="rating">PO OCENIE</div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="selection-section-mobile">
-            <div class="categories-mobile">
-                <div class="custom-select-wrapper">
-                    <div class="custom-select">
-                        Kategoria
-                        <img src="{{ asset('images/keyboard_arrow_down.svg') }}" alt="arrow down">
-                    </svg>
-                    </div>
-                    <div class="custom-options">
-                      <div data-value="comedy">KOMEDIA</div>
-                      <div data-value="drama">DRAMAT</div>
-                      <div data-value="horror">HORROR</div>
-                      <div data-value="sci-fi">SCI-FI</div>
-                      <div data-value="action">AKCJA</div>
-                      <div data-value="thriller">THRILLER</div>
-                      <div data-value="adventure">PRZYGODOWY</div>
-                    </div>
-                </div>
-    
-                <button id="favourite-button" class="normal-button">
-                    <img src="{{ asset('images/favorite.svg') }}" alt="favourite movies button">
-                </button>
-    
-                <button id="clear-button" class="normal-button">
-                    <img src="{{ asset('images/mop.svg') }}" alt="clear options button">
-                </button>
-            </div>
-
-            <div id="sort-select" class="custom-select-wrapper">
-                <div class="custom-select">
-                    Sortowanie
-                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}" alt="arrow down">
-                </svg>
-                </div>
-                <div class="custom-options">
-                  <div data-value="1">Option 1</div>
-                  <div data-value="2">Option 2</div>
                 </div>
             </div>
         </div>
@@ -116,11 +93,17 @@
     </main>
 
     <script>
-        const selectWrapper = document.querySelector('.custom-select-wrapper');
-        const selectBox = selectWrapper.querySelector('.custom-select');
-        const options = selectWrapper.querySelectorAll('.custom-options div');
+        const sortSelectWrapper = document.getElementById('sort-select-wrapper');
+        const sortSelectBox = document.getElementById('sort-select');
+
+        const categoriesSelectWrapper = document.getElementById('categories-select-wrapper');
+        const categoriesSelectBox = document.getElementById('categories-select');
+
+        const options = document.querySelectorAll('.custom-options div');
 
         const categoriesButtons = document.querySelectorAll('.normal-button, .small-button');
+        const mopButton = document.getElementById('clear-button');
+        const favouriteButton = document.getElementById('favourite-button');
 
         categoriesButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -131,26 +114,50 @@
                 }
             });
         });
+
+        mopButton.addEventListener('click', () => {
+            categoriesButtons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            sortSelectBox.innerHTML = `
+                Sortowanie
+                <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+            `;
+            categoriesSelectBox.innerHTML = `
+                Kategorie
+                <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+            `;
+
+        });
       
-        selectBox.addEventListener('click', () => {
-          selectWrapper.classList.toggle('open');
+        sortSelectBox.addEventListener('click', () => {
+          sortSelectWrapper.classList.toggle('open');
+        });
+
+        categoriesSelectBox.addEventListener('click', () => {
+            categoriesSelectWrapper.classList.toggle('open');
         });
       
         options.forEach(option => {
           option.addEventListener('click', () => {
+            const wrapper = option.parentElement.parentElement;
+            const selectBox = wrapper.querySelectorAll('.custom-select')[0];
             selectBox.textContent = option.textContent;
             selectBox.innerHTML = `
                 ${option.textContent}
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff" transform="scale(-1,1)">
-                <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/>`;
-            selectWrapper.classList.remove('open');
+                <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+            `;
+            wrapper.classList.remove('open');
           });
         });
       
         // Close dropdown if clicked outside
         document.addEventListener('click', (e) => {
-          if (!selectWrapper.contains(e.target)) {
-            selectWrapper.classList.remove('open');
+          if (!sortSelectWrapper.contains(e.target)) {
+            sortSelectWrapper.classList.remove('open');
+          }
+          if (!categoriesSelectWrapper.contains(e.target)) {
+            categoriesSelectWrapper.classList.remove('open');
           }
         });
     </script>
