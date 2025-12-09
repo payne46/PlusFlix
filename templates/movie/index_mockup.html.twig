@@ -79,7 +79,7 @@
                     <div class="movie-container">
                         <a href="{{ path('movie_show', { id: movie.id }) }}">
                             <div class="movie-banner"
-                                style="background: #{{ movie.banner }}"></div>
+                                style="background: {{ movie.banner }}"></div>
                             <div class="movie-info">
                                 <p class="movie-title">{{ movie.title }}
                                      <span class="movie-rating">({{ movie.rating }})</span>
