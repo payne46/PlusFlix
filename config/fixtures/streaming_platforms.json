@@ -1,0 +1,17 @@
+[
+  {
+    "name":         "Netflix",
+    "banner":       "netflix-banner.jpg",
+    "websiteUrl":   "https://www.netflix.com"
+  },
+  {
+    "name":         "Amazon Prime",
+    "banner":       "amazon-prime-banner.jpg",
+    "websiteUrl":   "https://www.primevideo.com"
+  },
+  {
+    "name":         "AppleTV",
+    "banner":       "appletv-banner.jpg",
+    "websiteUrl":   "https://tv.apple.com"
+  }
+]

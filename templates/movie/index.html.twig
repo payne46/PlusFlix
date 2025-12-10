@@ -1,154 +1,258 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block title %}PlusFlix – Twój katalog filmów online{% endblock %}
+    <title>{% block title %}PlusFlix - main{% endblock %}</title>
 
-{% block body %}
-    <h1>PlusFlix – Twój katalog filmów online</h1>
-    </br>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/movie-main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
+    {% endblock %}
 
-    {% if searchResults is defined %}
-        {% if searchResults is empty %}
-            <p>Brak wyników wyszukiwania</p>        
-            </br>
-        {% else %}
-            <h2>Wyniki wyszukiwania</h2>
-            </br>
-            <table border="1" cellpadding="8" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Tytuł</th>
-                        <th>Data produkcji</th>
-                        <th>Kraj</th>
-                        <th>Reżyser</th>
-                    </tr>
-                </thead>
-                <tbody>
+</head>
+<body>
+    <header>
+         {% include 'movie/banner.html.twig' %}
+    </header>
+
+    <main>
+        <form action="{{ path('app_home') }}" method="get">
+            <div class="search-section">
+                <input type="search" name="phrase" value="{{ currentPhrase ?? app.request.get('phrase') }}">
+                <input type="hidden" name="categories" id="categories-input" value="{{ currentCategories ?? app.request.get('categories') }}">
+                <button class="search-button">SZUKAJ</button>
+            </div>
+        </form>
+
+        <div class="selection-section">
+            <div class="categories">
+                <div class="normal-buttons">
+                    <button class="normal-button {{ 'comedy' in currentCategories ? 'selected' : '' }}" type="button" data-value="comedy">KOMEDIA</button>
+                    <button class="normal-button {{ 'drama' in currentCategories ? 'selected' : '' }}" type="button" data-value="drama">DRAMAT</button>
+                    <button class="normal-button {{ 'horror' in currentCategories ? 'selected' : '' }}" type="button" data-value="horror">HORROR</button>
+                    <button class="normal-button {{ 'sci-fi' in currentCategories ? 'selected' : '' }}" type="button" data-value="sci-fi">SCI-FI</button>
+                    <button class="normal-button {{ 'action' in currentCategories ? 'selected' : '' }}" type="button" data-value="action">AKCJA</button>
+                    <button class="normal-button {{ 'thriller' in currentCategories ? 'selected' : '' }}" type="button" data-value="thriller">THRILLER</button>
+                    <button class="normal-button {{ 'adventure' in currentCategories ? 'selected' : '' }} last-button" type="button" data-value="adventure">PRZYGODOWY</button>
+                </div>
+
+                <div class="small-buttons">
+                    <div class="custom-select-wrapper categories-mobile" id="categories-select-wrapper">
+                        <div class="custom-select" id="categories-select">
+                            Kategoria
+                            <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+                        </div>
+                        <div class="custom-options">
+                          <div data-value="comedy">KOMEDIA</div>
+                          <div data-value="drama">DRAMAT</div>
+                          <div data-value="horror">HORROR</div>
+                          <div data-value="sci-fi">SCI-FI</div>
+                          <div data-value="action">AKCJA</div>
+                          <div data-value="thriller">THRILLER</div>
+                          <div data-value="adventure">PRZYGODOWY</div>
+                        </div>
+                    </div>
+
+
+                    <button class="special-button" id="favourite-button">
+                        <img src="{{ asset('images/favorite.svg') }}" alt="favourite movies button">
+                    </button>
+                    <button class="special-button" id="clear-button">
+                        <img src="{{ asset('images/mop.svg') }}" alt="clear options button">
+                    </button>
+                </div>
+            </div>
+
+            <!-- sort -->
+            <div class="custom-select-wrapper" id="sort-select-wrapper">
+                <div id="sort-select" class="custom-select">
+                    Sortowanie
+                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+                </div>
+                <div class="custom-options">
+                  <div data-value="rating">PO OCENIE</div>
+                </div>
+            </div>
+        </div>
+
+        {% if searchResults is defined %}
+            {% if searchResults is empty %}
+                <p class="header-title">Brak wyników wyszukiwania</p>        
+                </br>
+            {% else %}            
+                <div class="movies-container">
                     {% for movie in searchResults %}
-                        <tr>
-                            <td>
+                        <div class="movie-container">
+                            <a href="{{ path('movie_show', { id: movie.id }) }}">
+                                <div class="movie-banner"
+                                    style="background: {{ movie.banner }}"></div>
+                                <div class="movie-info">
+                                    <p class="movie-title">{{ movie.title }}
+                                        <span class="movie-rating">({{ movie.rating }})</span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}                        
+                </div>
+                </br>
+            {% endif %}
+        {% else %}
+            {% if movies is defined %}
+                {% if movies is empty %}
+                    <p class="header-title">Brak filmów w bazie</p>        
+                    </br>
+                {% else %}
+                    {% if searchResults is defined %}
+                        <p class="header-title">Wszystkie filmy</h2>
+                        </br>
+                    {% endif %}               
+                    <div class="movies-container">
+                        {% for movie in movies %}
+                            <div class="movie-container">
                                 <a href="{{ path('movie_show', { id: movie.id }) }}">
-                                    {{ movie.title }}
+                                    <div class="movie-banner"
+                                        style="background: {{ movie.banner }}"></div>
+                                    <div class="movie-info">
+                                        <p class="movie-title">{{ movie.title }}
+                                            <span class="movie-rating">({{ movie.rating }})</span>
+                                        </p>
+                                    </div>
                                 </a>
-                            </td>
-                            <td>
-                                {# releaseDate jest DateTime? – formatujemy #}
-                                {% if movie.releaseDate %}
-                                    {{ movie.releaseDate|date('Y-m-d') }}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </td>
-                            <td>{{ movie.country ?? '-' }}</td>
-                            <td>{{ movie.director ?? '-' }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            </br>
-        {% endif %}
-    {% endif %}
+                            </div>
+                        {% endfor %}                        
+                    </div>
+                    </br>
+                {% endif %}
+            {% endif %}
+        {% endif %}                
 
-    {% if topMovies is empty %}
-        <p>Brak najwyżej ocenianych filmów</p>
-    {% else %}
-        <h2>Najwyżej oceniane filmy</h2>
-        </br>
-        <table border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Tytuł</th>
-                    <th>Data produkcji</th>
-                    <th>Kraj</th>
-                    <th>Reżyser</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for movie in topMovies %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('movie_show', { id: movie.id }) }}">
-                                {{ movie.title }}
-                            </a>
-                        </td>
-                        <td>
-                            {# releaseDate jest DateTime? – formatujemy #}
-                            {% if movie.releaseDate %}
-                                {{ movie.releaseDate|date('Y-m-d') }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td>{{ movie.country ?? '-' }}</td>
-                        <td>{{ movie.director ?? '-' }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-    </br>
+    </main>
 
-    {% if movies is empty %}
-        <p>Brak filmów w bazie</p>
-    {% else %}
-        <h2>Wszystkie filmy</h2>
-        </br>
-        <table border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Tytuł</th>
-                    <th>Data produkcji</th>
-                    <th>Kraj</th>
-                    <th>Reżyser</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for movie in movies %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('movie_show', { id: movie.id }) }}">
-                                {{ movie.title }}
-                            </a>
-                        </td>
-                        <td>
-                            {# releaseDate jest DateTime? – formatujemy #}
-                            {% if movie.releaseDate %}
-                                {{ movie.releaseDate|date('Y-m-d') }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td>{{ movie.country ?? '-' }}</td>
-                        <td>{{ movie.director ?? '-' }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-    </br>
-    
-    {% if streamingPlatforms is empty %}
-        <p>Brak danych o platformach streamingowych</p>
-    {% else %}
-        <h2>Platformy streamingowe</h2>
-        </br>
-        <table border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Adres URL</th>
-                    <th>Logo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for platform in streamingPlatforms %}
-                    <tr>
-                        <td>{{ platform.name }}</td>
-                        <td>{{ platform.websiteUrl ?? '-' }}</td>
-                        <td>{{ platform.banner ?? '-' }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+    <script>
+    const sortSelectWrapper = document.getElementById('sort-select-wrapper');
+    const sortSelectBox = document.getElementById('sort-select');
 
-{% endblock %}
+    const categoriesSelectWrapper = document.getElementById('categories-select-wrapper');
+    const categoriesSelectBox = document.getElementById('categories-select');
+
+    const options = document.querySelectorAll('.custom-options div');
+
+    const form = document.querySelector('form');
+    const categoryInput = document.getElementById('categories-input');
+
+    const categoriesButtons = document.querySelectorAll('.normal-button, .small-button');
+    const mopButton = document.getElementById('clear-button');
+    const favouriteButton = document.getElementById('favourite-button');
+
+    function updateCategoriesAndSubmit() {
+        const selectedDesktop = Array.from(document.querySelectorAll('.normal-button.selected'))
+            .map(btn => btn.dataset.value);
+
+        const selectedMobile = Array.from(
+            document.querySelectorAll('#categories-select-wrapper .custom-options div.selected')
+        ).map(opt => opt.dataset.value);
+
+        const allSelected = Array.from(new Set([...selectedDesktop, ...selectedMobile]));
+
+        categoryInput.value = allSelected.join(';');
+        form.submit();
+    }
+
+    categoriesButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('selected');
+            updateCategoriesAndSubmit();
+        });
+    });
+
+    mopButton.addEventListener('click', () => {
+        categoriesButtons.forEach(btn => {
+            btn.classList.remove('selected');
+        });
+
+        document
+            .querySelectorAll('#categories-select-wrapper .custom-options div.selected')
+            .forEach(opt => opt.classList.remove('selected'));
+
+        categoryInput.value = '';
+
+        const phraseInput = document.querySelector('input[name="phrase"]');
+        if (phraseInput) {
+            phraseInput.value = '';
+        }
+
+        sortSelectBox.innerHTML = `
+            Sortowanie
+            <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+        `;
+        categoriesSelectBox.innerHTML = `
+            Kategoria
+            <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+        `;
+
+        form.submit();
+    });
+
+    sortSelectBox.addEventListener('click', () => {
+        sortSelectWrapper.classList.toggle('open');
+    });
+
+    categoriesSelectBox.addEventListener('click', () => {
+        categoriesSelectWrapper.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const wrapper = option.closest('.custom-select-wrapper');
+            const selectBox = wrapper.querySelector('.custom-select');
+
+            if (wrapper.id === 'sort-select-wrapper') {
+                selectBox.innerHTML = `
+                    ${option.textContent}
+                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+                `;
+                wrapper.classList.remove('open');
+
+                // Good place for sorting
+                // form.submit();
+                return;
+            }
+
+            if (wrapper.id === 'categories-select-wrapper') {
+                option.classList.toggle('selected');
+
+                const selectedOptions = wrapper.querySelectorAll('.custom-options div.selected');
+                const count = selectedOptions.length;
+
+                let labelText = 'Kategoria';
+                if (count === 1) {
+                    labelText = selectedOptions[0].textContent.trim();
+                } else if (count > 1) {
+                    labelText = `Kategorie (${count})`;
+                }
+
+                selectBox.innerHTML = `
+                    ${labelText}
+                    <img src="{{ asset('images/keyboard_arrow_down.svg') }}">
+                `;
+
+                updateCategoriesAndSubmit();
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!sortSelectWrapper.contains(e.target)) {
+            sortSelectWrapper.classList.remove('open');
+        }
+        if (!categoriesSelectWrapper.contains(e.target)) {
+            categoriesSelectWrapper.classList.remove('open');
+        }
+    });
+</script>
+
+</body>
+</html>

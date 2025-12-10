@@ -8,7 +8,6 @@ body{
     background-color: #00111C;
 }
 
-
 /* search section */
 
 .search-section {
@@ -223,7 +222,15 @@ button:hover {
     gap: 5px;
 }
 
-
+.header-title {
+    color: white;
+    text-align: center;
+    margin-top: 8px;
+    font-family: "Anton", sans-serif;
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 /* phone layout  */
 

@@ -1,55 +1,111 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}{{ movie.title }} – szczegóły{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block body %}
-    <h1>{{ movie.title }}</h1>
-    <br>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/movie-show.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            {% include 'movie/banner.html.twig' %}
+        </header>
+        <a href="{{ path('app_home') }}">
+            <img id="return_button" src="{{ asset('images/return_arrow.png') }}" alt="return_button">
+        </a>
+        <div id="content">
+            <div id="left_data">
+                <div id="banner">
+                    <img id="heart_icon" src="{{ asset('images/empty_heart.svg') }}">
+                </div>
+                <div id="rating">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
+                    <p id="rating_mean">(1)</p>
+                </div>
+            </div>
 
-    <p><strong>Opis: </strong>
-        {{ movie.description ?? 'Brak opisu.' }}
-    </p>
+            <div id="right_data">
+                <div id="title_contents">
+                    <div id="title_box">{{ movie.title }}</div>
+                </div>
+                <div id="description">{{ movie.description ?? 'Brak opisu.' }}</div>
+                <div id="properties_list">
+                    <div class="movie_property">Gatunek: <p class="movie_property_value">{{ movie.genre ?? '-' }}</p></div>
+                    <div class="movie_property">Data premiery: 
+                    <p class="movie_property_value">
+                        {% if movie.releaseDate %}
+                            {{ movie.releaseDate|date('Y-m-d') }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p></div>
+                    <div class="movie_property">Kraj produkcji: <p class="movie_property_value">{{ movie.country ?? '-' }}</p></div>
+                    <div class="movie_property">Reżyser: <p class="movie_property_value">{{ movie.director ?? '-' }}</p></div>
+                    <div class="movie_property">Scenarzysta: <p class="movie_property_value">{{ movie.screenwriter ?? '-' }}</p></div>                    
+                    <div class="movie_property">Długość: 
+                    <p class="movie_property_value">
+                        {% if movie.length %}
+                            {{ movie.length }} min
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p></div>
+                </div>
+            </div>
 
-    <p><strong>Reżyser: </strong> {{ movie.director ?? '-' }}</p>
-    <p><strong>Scenarzysta: </strong> {{ movie.screenwriter ?? '-' }}</p>
+        </div>
+        <div id="platforms_list">
+            <div class="platform">
+                <div class="platform_baner"></div>
+                <button class="platform_button">Zobacz teraz</button>
+            </div>
+            <div class="platform">
+                <div class="platform_baner"></div>
+                <button class="platform_button">Zobacz teraz</button>
+            </div>
+        </div>
 
-    <p><strong>Data premiery: </strong>
-        {% if movie.releaseDate %}
-            {{ movie.releaseDate|date('Y-m-d') }}
-        {% else %}
-            -
-        {% endif %}
-    </p>
 
-    <p><strong>Gatunek: </strong> {{ movie.genre ?? '-' }}</p>
-    <p><strong>Długość: </strong>
-        {% if movie.length %}
-            {{ movie.length }} min
-        {% else %}
-            -
-        {% endif %}
-    </p>
+        <script>
+            const stars = document.querySelectorAll("#rating .star");
 
-    <p><strong>Kraj: </strong> {{ movie.country ?? '-' }}</p>
+            const emptyStar = "{{ asset('images/empty_star.svg') }}";
+            const clickedStar = "{{ asset('images/clicked_star.svg') }}";
 
-    <p><strong>Ocena (średnia):</strong>
-        {% if movie.rating is not null %}
-            {{ movie.rating }}/5
-        {% else %}
-            brak ocen
-        {% endif %}
-    </p>
+            stars.forEach((star, index) => {
+                star.addEventListener("click", () => {
 
-    {# Jeśli w encji Movie masz pole banner z URL-em do obrazka #}
-    {% if movie.banner %}
-        <p>
-            <strong>Baner: </strong>
-            <img src="{{ movie.banner }}" alt="Baner filmu {{ movie.title }}" style="max-width: 300px;">
-        </p>
-    {% endif %}
+                    stars.forEach((s, i) => {
+                        s.src = i <= index ? clickedStar : emptyStar;
+                    });
 
-    </br>
-    <p>
-        <a href="{{ path('app_home') }}">← Powrót do listy filmów</a>
-    </p>
-{% endblock %}
+                });
+            });
+
+            const heart = document.getElementById("heart_icon");
+
+            const emptyHeart = "{{ asset('images/empty_heart.svg') }}";
+            const clickedHeart = "{{ asset('images/clicked_heart.svg') }}";
+
+            heart.addEventListener("click", () => {
+                heart.src = heart.src.includes("empty_heart.svg")
+                    ? clickedHeart
+                    : emptyHeart;
+            });
+        </script>
+    </body>
+</html>
+
+
+
