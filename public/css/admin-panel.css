@@ -1,5 +1,5 @@
 body {
-    background: white;
+    background-color: #00111C;
     font-family: Inter, sans-serif;
     margin: 0;
 }
@@ -8,31 +8,40 @@ body {
     width: 100%;
 }
 
-.topbar {
-    background: #D9D9D9;
-    padding: 25px 0;
-    font-size: 32px;
-    text-align: center;
-}
-
 .tab-container {
+    margin-top: 25px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .tab-button {
     border: none;
     padding: 15px 70px;
-    background: #D9D9D9;
-    font-size: 20px;
+    background: #002E4E;
+    font-size: 24px;
     margin: 0;
     cursor: pointer;
+    color: white;
+}
+
+.tab-button.active {
+    background: #0D9CFF;
+}
+
+#tab-films {
+    border-bottom-left-radius: 35px;
+    border-top-left-radius: 35px;
+}
+
+#tab-platforms {
+    border-bottom-right-radius: 35px;
+    border-top-right-radius: 35px;
 }
 
 .util-list {
     width: 90%;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -45,51 +54,56 @@ body {
     gap: 50px;
 }
 
+/*.util-button {*/
+/*    flex: 1;*/
+/*    padding: 15px 15px;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    background: #D9D9D9;*/
+/*    font-size: 32px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.util-button:hover {*/
+/*    background-color: #cccccc;*/
+/*}*/
+
 .util-button {
     flex: 1;
-    padding: 15px 15px;
+    background: #0D9CFF;
+    color: white;
     border: none;
-    border-radius: 4px;
-    background: #D9D9D9;
-    font-size: 32px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
     cursor: pointer;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .util-button:hover {
-    background-color: #cccccc;
+    background-color: #80CCFF;
 }
+
 
 .search-container {
-    flex: 0 0 calc(70% - 50px);
+    flex: 0 0 calc(70% - 40px);
     display: flex;
+    justify-content: space-between;
 }
 
-.search-wrapper {
+.search-container input[type="search"] {
     width: 100%;
-    position: relative;
-}
-
-.search-icon {
-    font-family: "Material Symbols Outlined";
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #000;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.searchbar {
-    width: 100%;
-    background: #D9D9D9;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #ffffff;
+    background: #002E4E url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23ffffff"><circle cx="7" cy="7" r="5" stroke="%23ffffff" stroke-width="2" fill="none"/><line x1="11" y1="11" x2="15" y2="15" stroke="%23ffffff" stroke-width="2"/></svg>')
+        no-repeat 15px center;
+    background-size: 2.08vh;
     padding-left: 50px;
+    color: white;
     font-size: 24px;
-    box-sizing: border-box;
 }
 
 .item-list {
@@ -100,7 +114,7 @@ body {
 }
 
 .item {
-    background: #D9D9D9;
+    background: #002E4E;
     width: 100%;
     height: 75px;
     font-size: 24px;
@@ -108,15 +122,17 @@ body {
     flex-direction: row;
     gap: 40px;
     align-items: center;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .item:hover {
-    background-color: #cccccc;;
+    background: #003a65;
     cursor: pointer;
-}
-
-.tab-button.active {
-    background: #bbb;
 }
 
 .hidden {
@@ -129,8 +145,8 @@ body {
 }
 
 .round-checkbox label {
-    background-color: #fff;
-    border: 3px solid #000;
+    background-color: #002E4E;
+    border: 3px solid #fff;
     border-radius: 50%;
     cursor: pointer;
     height: 28px;
@@ -141,7 +157,7 @@ body {
 }
 
 .round-checkbox label:after {
-    border: 3px solid #000;
+    border: 3px solid #fff;
     border-top: none;
     border-right: none;
     content: "";
@@ -159,9 +175,8 @@ body {
 }
 
 .round-checkbox input[type="checkbox"]:checked + label {
-    background-color: #bbb;
-    border-color: #bbb;
-    border: 3px solid #000;
+    background-color: #0D9CFF;
+    border-color: #fff;
 }
 
 .round-checkbox input[type="checkbox"]:checked + label:after {
