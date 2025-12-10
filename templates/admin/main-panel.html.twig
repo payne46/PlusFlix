@@ -4,48 +4,48 @@
     <meta charset="UTF-8">
     <title>{% block title %}Panel Administratora{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/admin-panel.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
     {% endblock %}
 </head>
 <body>
 
 <div class="container">
-    <div class="topbar">
-        PLUSFLIX: Panel Administratora
-    </div>
+    <header>
+        {% include 'admin/banner-admin.html.twig' %}
+    </header>
 
     <div class="tab-container">
-        <button class="tab-button active" data-tab="films">FILMY</button>
-        <button class="tab-button" data-tab="platforms">PLATFORMY</button>
+        <button class="tab-button active" data-tab="films" id="tab-films">FILMY</button>
+        <button class="tab-button" data-tab="platforms" id="tab-platforms">PLATFORMY</button>
     </div>
 
     <div class="util-list">
         <div class="buttons-container">
             <button class="util-button" id="add-button">DODAJ</button>
-            <button class="util-button" id="edit-button">EDYTUJ</button>
             <button class="util-button" id="delete-button">USUŃ</button>
         </div>
 
         <div class="search-container">
-            <div class="search-wrapper">
-                <span class="material-symbols-outlined search-icon">search</span>
-                <input class="searchbar" />
-            </div>
+            <input type="search" >
         </div>
     </div>
 
     <div class="tab-content" id="films">
         <ul class="item-list">
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-1" data-id="1" />
-                    <label for="checkbox-1"></label>
-                </div>
-                <div>
-                    Harry Potter i Kamień Inżynierski
-                </div>
+            <li>
+                <a href="{{ path('admin_movie_edit', { id: 1 }) }}" >  <!-- Test redirection to edit page -->
+                    <div class="item">
+                        <div class="round-checkbox">
+                            <input type="checkbox" id="checkbox-1" data-id="1" />
+                            <label for="checkbox-1"></label>
+                        </div>
+                        <div>
+                            Harry Potter i Kamień Inżynierski
+                        </div>
+                    </div>
+                </a>
             </li>
             <li class="item">
                 <div class="round-checkbox">
@@ -108,7 +108,7 @@
         <ul class="item-list">
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-11" data-id="1" />
+                    <input type="checkbox" id="checkbox-11" data-id="11" />
                     <label for="checkbox-11"></label>
                 </div>
                 <div>
@@ -117,7 +117,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-22" data-id="2" />
+                    <input type="checkbox" id="checkbox-22" data-id="22" />
                     <label for="checkbox-22"></label>
                 </div>
                 <div>
@@ -126,7 +126,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-33" data-id="3" />
+                    <input type="checkbox" id="checkbox-33" data-id="33" />
                     <label for="checkbox-33"></label>
                 </div>
                 <div>
@@ -135,7 +135,7 @@
             </li>
             <li class="item">
                 <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-44" data-id="4" />
+                    <input type="checkbox" id="checkbox-44" data-id="44" />
                     <label for="checkbox-44"></label>
                 </div>
                 <div>
@@ -172,32 +172,8 @@
                 });
 
                 selectedItemId = null;
-                document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(cb =>
-                {
-                    cb.checked = false;
-                });
             });
-        });
-
-        document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(checkbox =>
-        {
-            checkbox.addEventListener('change', (e) =>
-            {
-                if (e.target.checked)
-                {
-                    document.querySelectorAll('.round-checkbox input[type="checkbox"]').forEach(cb =>
-                    {
-                        if (cb !== e.target) cb.checked = false;
-                    });
-
-                    selectedItemId = e.target.dataset.id;
-                }
-                else
-                {
-                    selectedItemId = null;
-                }
-            });
-        });
+        })
 
         // Dodawanie
         addButton.addEventListener('click', () =>
