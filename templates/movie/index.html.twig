@@ -56,7 +56,7 @@
                     </div>
 
 
-                    <button class="special-button" id="favourite-button">
+                    <button class="special-button  favourite-button {{ 'favourites' in currentCategories or favouritesClicked ? 'selected' : '' }}" id="favourite-button" data-value="favourites">
                         <img src="{{ asset('images/favorite.svg') }}" alt="favourite movies button">
                     </button>
                     <button class="special-button" id="clear-button">
@@ -143,14 +143,14 @@
     const form = document.querySelector('form');
     const categoryInput = document.getElementById('categories-input');
 
-    const categoriesButtons = document.querySelectorAll('.normal-button, .small-button');
+    const categoriesButtons = document.querySelectorAll('.normal-button, .small-button, .favourite-button');
     const mopButton = document.getElementById('clear-button');
     const favouriteButton = document.getElementById('favourite-button');
 
     function updateCategoriesAndSubmit() {
-        const selectedDesktop = Array.from(document.querySelectorAll('.normal-button.selected'))
+        const selectedDesktop = Array.from(document.querySelectorAll('.normal-button.selected, .favourite-button.selected'))
             .map(btn => btn.dataset.value);
-
+       
         const selectedMobile = Array.from(
             document.querySelectorAll('#categories-select-wrapper .custom-options div.selected')
         ).map(opt => opt.dataset.value);
@@ -172,6 +172,8 @@
         categoriesButtons.forEach(btn => {
             btn.classList.remove('selected');
         });
+
+        favouriteButton.classList.remove('selected');
 
         document
             .querySelectorAll('#categories-select-wrapper .custom-options div.selected')
