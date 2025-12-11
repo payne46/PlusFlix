@@ -37,22 +37,46 @@ class MovieController extends AbstractController
                 static fn ($v) => $v !== ''
             );
         }
+        
+        $movies = [];
+       
+        $favouritesClicked = false;
+        if (in_array('favourites', $categoriesArray)) {         
+            $favouritesCookie = $request->cookies->get('favourites', ''); 
+            $favouriteIds = array_filter(array_map('intval', explode(',', $favouritesCookie)));
+            
+
+            if (!empty($favouriteIds)) {
+                $favouritesClicked = true;
+                $favouriteMovies = $movieRepository->findBy(['id' => $favouriteIds]);
+                $movies = array_merge($movies, $favouriteMovies);
+            }
+            
+            $categoriesArray = array_filter($categoriesArray, fn($c) => $c !== 'favourites');
+        }
 
         if ($phrase !== null || !empty($categoriesArray)) {
             $searchResults = $movieRepository->search($phrase, $categoriesArray);
+            $movies = array_merge($movies, $searchResults);
 
             return $this->render('movie/index.html.twig', [
                 'searchResults'      => $searchResults,
                 'currentPhrase'      => $phrase,
                 'currentCategories'  => $categoriesArray,
                 'categoriesString'   => $categoriesString,
+                'favouritesClicked'  => $favouritesClicked,
             ]);
         }
 
-        $movies = $movieRepository->findAll();
+        if (empty($movies)) {
+            $movies = $movieRepository->findAll();
+        }
+
+        $movies = array_unique($movies, SORT_REGULAR);
 
         return $this->render('movie/index.html.twig', [
-            'movies' => $movies
+            'movies' => $movies,
+            'favouritesClicked'  => $favouritesClicked,
         ]);
     }
 
