@@ -18,7 +18,7 @@
     <div class="login-container">
 {#        <h1 class="login-header">PANEL ADMINISTRATORA</h1>#}
 
-        <form>
+        <form method="post" action="{{ path('admin_login') }}">
             <label class="login-label" for="login">Login</label>
             <input class="login-input" type="text" id="login" name="login">
 
@@ -27,6 +27,10 @@
 
             <button class="login-submit" type="submit">ZALOGUJ</button>
         </form>
+
+        {% if error is defined %}
+            <script>alert("{{ error }}");</script>
+        {% endif %}
     </div>
 </body>
 </html>
