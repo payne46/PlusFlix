@@ -15,8 +15,10 @@ body {
 }
 
 .tab-button {
+    width: 300px;
     border: none;
-    padding: 15px 70px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background: #002E4E;
     font-size: 24px;
     margin: 0;
@@ -53,20 +55,6 @@ body {
     display: flex;
     gap: 50px;
 }
-
-/*.util-button {*/
-/*    flex: 1;*/
-/*    padding: 15px 15px;*/
-/*    border: none;*/
-/*    border-radius: 4px;*/
-/*    background: #D9D9D9;*/
-/*    font-size: 32px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.util-button:hover {*/
-/*    background-color: #cccccc;*/
-/*}*/
 
 .util-button {
     flex: 1;

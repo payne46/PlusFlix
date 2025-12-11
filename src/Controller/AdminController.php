@@ -19,11 +19,11 @@ class AdminController extends AbstractController
         EntityManagerInterface $em,
         ?Movie $movie = null,
     ): Movie {
-    
+
         if (!$movie) {
             $movie = new Movie();
         }
-    
+
         $movie->setTitle($request->request->get('title'));
         $movie->setDescription($request->request->get('description'));
         $movie->setDirector($request->request->get('director'));
@@ -31,32 +31,30 @@ class AdminController extends AbstractController
         $movie->setGenre($request->request->get('genre'));
         $movie->setCountry($request->request->get('country'));
         $movie->setBanner($request->request->get('banner'));
-    
+
         $releaseDate = $request->request->get('releaseDate');
         $movie->setReleaseDate($releaseDate ? new \DateTime($releaseDate) : null);
-        
+
         $length = $request->request->get('length');
         $movie->setLength($length !== null ? (int)$length : null);
-    
+
         $rating = $request->request->get('rating');
         $movie->setRating($rating !== null ? (string)$rating : null);
         $movie->setRatingsCount($rating !== null && $rating!==0 ? 1 : 0);
-    
+
         $em->persist($movie);
         $em->flush();
-    
+
         return $movie;
     }
 
-    #[Route('/admin-login', name: 'admin_login')]
-    public function adminLogin(): Response
-    {
-        return $this->render('admin/login.html.twig');
-    }
-
     #[Route('/admin-panel', name: 'admin_main_panel')]
-    public function adminPanel(): Response
+    public function adminPanel(Request $request): Response
     {
+        if (!$request->getSession()->get('admin_logged')) {
+            return $this->redirectToRoute('admin_login');
+        }
+
         return $this->render('admin/main-panel.html.twig');
     }
 
