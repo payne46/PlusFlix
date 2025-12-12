@@ -17,7 +17,7 @@
     </header>
 
     <div class="tab-container">
-        <button class="tab-button active" data-tab="films" id="tab-films">FILMY</button>
+        <button class="tab-button active" data-tab="movies" id="tab-movies">FILMY</button>
         <button class="tab-button" data-tab="platforms" id="tab-platforms">PLATFORMY</button>
     </div>
 
@@ -28,120 +28,55 @@
         </div>
 
         <div class="search-container">
-            <input type="search" >
+            <input type="search" id="search-bar"/>
         </div>
     </div>
 
-    <div class="tab-content" id="films">
+    <div class="tab-content" id="movies">
         <ul class="item-list">
-            <li>
-                <a href="{{ path('admin_movie_edit', { id: 1 }) }}" >  <!-- Test redirection to edit page -->
-                    <div class="item">
-                        <div class="round-checkbox">
-                            <input type="checkbox" id="checkbox-1" data-id="1" />
-                            <label for="checkbox-1"></label>
+            {% for movie in movies %}
+                <li>
+                    <a href="{{ path('admin_movie_edit', { id: movie.id }) }}">
+                        <div class="item">
+                            <div class="round-checkbox">
+                                <input type="checkbox"
+                                       id="checkbox-movie-{{ movie.id }}"
+                                       data-id="{{ movie.id }}"
+                                       data-category="movie"
+                                />
+                                <label for="checkbox-movie-{{ movie.id }}"></label>
+                            </div>
+                            <div>
+                                {{ movie.title }}
+                            </div>
                         </div>
-                        <div>
-                            Harry Potter i Kamień Inżynierski
-                        </div>
-                    </div>
-                </a>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-2" data-id="2" />
-                    <label for="checkbox-2"></label>
-                </div>
-                <div>
-                    Harry Potter i Komnata Habilitacji
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-3" data-id="3" />
-                    <label for="checkbox-3"></label>
-                </div>
-                <div>
-                    Harry Potter i Więzień Uczelni
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-4" data-id="4" />
-                    <label for="checkbox-4"></label>
-                </div>
-                <div>
-                    Harry Potter i Czara Dyplomowa
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-5" data-id="5" />
-                    <label for="checkbox-5"></label>
-                </div>
-                <div>
-                    Harry Potter i Zakon Poprawkowicza
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-6" data-id="6" />
-                    <label for="checkbox-6"></label>
-                </div>
-                <div>
-                    Harry Potter i Książę Pół-Algorytmu
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-7" data-id="7" />
-                    <label for="checkbox-7"></label>
-                </div>
-                <div>
-                    Harry Potter i Insygnia Egzaminacyjne
-                </div>
-            </li>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
     <div class="tab-content hidden" id="platforms">
         <ul class="item-list">
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-11" data-id="11" />
-                    <label for="checkbox-11"></label>
-                </div>
-                <div>
-                    Netflix
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-22" data-id="22" />
-                    <label for="checkbox-22"></label>
-                </div>
-                <div>
-                    Amazon Prime
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-33" data-id="33" />
-                    <label for="checkbox-33"></label>
-                </div>
-                <div>
-                    HBO Max
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-44" data-id="44" />
-                    <label for="checkbox-44"></label>
-                </div>
-                <div>
-                    Disney+
-                </div>
-            </li>
+            {% for platform in streamingPlatforms %}
+                <li>
+                    <a href="{{ path('admin_platform_edit', { id: platform.id }) }}">
+                        <div class="item">
+                            <div class="round-checkbox">
+                                <input type="checkbox"
+                                       id="checkbox-platform-{{ platform.id }}"
+                                       data-id="{{ platform.id }}"
+                                       data-category="platform"
+                                />
+                                <label for="checkbox-platform-{{ platform.id }}"></label>
+                            </div>
+                            <div>
+                                {{ platform.name }}
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
@@ -150,76 +85,108 @@
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".tab-button");
         const tabs = document.querySelectorAll(".tab-content");
-        const addButton = document.getElementById('add-button');
-        const editButton = document.getElementById('edit-button');
-        const deleteButton = document.getElementById('delete-button');
 
-        let currentTab = 'films';
+        const addButton = document.getElementById('add-button');
+        addButton.addEventListener('click', () => {
+            if (currentTab === 'movies') {
+                window.location.href = '{{ path("admin_movie_add") }}';
+            }
+            else if (currentTab === 'platforms') {
+                window.location.href = '{{ path("admin_platform_add") }}';
+            }
+        });
+
+        let currentTab = 'movies';
         let selectedItemId = null;
 
+        // buttons.forEach(button => {
+        //     button.addEventListener("click", () => {
+        //         const tabId = button.dataset.tab;
+        //         currentTab = tabId;
+        //
+        //         buttons.forEach(b => b.classList.remove("active"));
+        //         button.classList.add("active");
+        //
+        //         tabs.forEach(tab => {
+        //             tab.classList.toggle("hidden", tab.id !== tabId);
+        //         });
+        //
+        //         selectedItemId = null;
+        //     });
+        // })
+
         buttons.forEach(button => {
-            button.addEventListener("click", () =>
-            {
+            button.addEventListener("click", () => {
                 const tabId = button.dataset.tab;
                 currentTab = tabId;
 
                 buttons.forEach(b => b.classList.remove("active"));
                 button.classList.add("active");
 
-                tabs.forEach(tab =>
-                {
+                tabs.forEach(tab => {
                     tab.classList.toggle("hidden", tab.id !== tabId);
                 });
 
                 selectedItemId = null;
+
+                searchBar.value = "";
+
+                const items = document.getElementById(tabId).querySelectorAll("li");
+                items.forEach(item => item.style.display = "");
             });
-        })
-
-        // Dodawanie
-        addButton.addEventListener('click', () =>
-        {
-            if (currentTab === 'films')
-            {
-                window.location.href = '{{ path("admin_movie_add") }}';
-            }
-            else if (currentTab === 'platforms')
-            {
-                window.location.href = '{{ path("admin_platform_add") }}';
-            }
         });
 
-        // Edycja
-        editButton.addEventListener('click', () =>
-        {
-            if (!selectedItemId)
-            {
-                alert('Proszę wybrać element do edycji');
+        const searchBar = document.getElementById("search-bar");
+        searchBar.addEventListener("input", () => {
+            const query = searchBar.value.toLowerCase();
+
+            const activeTab = document.getElementById(currentTab);
+            const items = activeTab.querySelectorAll("li");
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(query) ? "" : "none";
+            });
+        });
+
+        const deleteButton = document.getElementById('delete-button');
+        deleteButton.addEventListener("click", () => {
+            const activeTab = document.getElementById(currentTab);
+            const checkedBoxes = activeTab.querySelectorAll("input[type='checkbox']:checked");
+
+            if (checkedBoxes.length === 0) {
+                alert("Nie wybrano żadnych pozycji!");
                 return;
             }
 
-            if (currentTab === 'films')
-            {
-                window.location.href = `/admin/movie/edit/${selectedItemId}`;
-            }
-            else if (currentTab === 'platforms')
-            {
-                window.location.href = `/admin/platform/edit/${selectedItemId}`;
-            }
-        });
+            const ids = Array.from(checkedBoxes).map(cb => cb.dataset.id);
 
-        // Usuwanie
-        deleteButton.addEventListener('click', () =>
-        {
-            if (!selectedItemId)
-            {
-                alert('Proszę wybrać element do usunięcia');
-                return;
-            }
+            const route =
+                currentTab === "movies"
+                    ? "/admin/movie/delete"
+                    : "/admin/platform/delete";
 
-            if (confirm('Czy na pewno chcesz usunąć wybrany element?'))
-            {
-                // dodac usuwanie
-            }
+            fetch(route, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ids: ids })
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        checkedBoxes.forEach(cb => {
+                            cb.closest("li").remove();
+                        });
+                    } else {
+                        alert("Wystąpił błąd podczas usuwania.");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Błąd po stronie klienta.");
+                });
         });
     });
 </script>

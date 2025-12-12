@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Movie;
 use App\Entity\StreamingPlatform;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -49,13 +50,65 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin-panel', name: 'admin_main_panel')]
-    public function adminPanel(Request $request): Response
+    public function adminPanel(
+        Request $request,
+        MovieRepository $movieRepository,
+        StreamingPlatformRepository $streamingPlatformRepository
+    ): Response
     {
         if (!$request->getSession()->get('admin_logged')) {
             return $this->redirectToRoute('admin_login');
         }
 
-        return $this->render('admin/main-panel.html.twig');
+        $movies = $movieRepository->findAll();
+        $streamingPlatforms = $streamingPlatformRepository->findAll();
+
+        return $this->render('admin/main-panel.html.twig', [
+            'movies'             => $movies,
+            'streamingPlatforms' => $streamingPlatforms,
+        ]);
+    }
+
+    #[Route('/admin/movie/delete', name: 'admin_movie_delete', methods: ['POST'])]
+    public function deleteMultipleMovies(
+        Request $request,
+        MovieRepository $movieRepository,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        $data = json_decode($request->getContent(), true);
+        $ids = $data['ids'] ?? [];
+
+        foreach ($ids as $id) {
+            $movie = $movieRepository->find($id);
+            if ($movie) {
+                $em->remove($movie);
+            }
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
+    }
+
+    #[Route('/admin/platform/delete', name: 'admin_platform_delete', methods: ['POST'])]
+    public function deleteMultiplePlatforms(
+        Request $request,
+        StreamingPlatformRepository $platformRepository,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        $data = json_decode($request->getContent(), true);
+        $ids = $data['ids'] ?? [];
+
+        foreach ($ids as $id) {
+            $platform = $platformRepository->find($id);
+            if ($platform) {
+                $em->remove($platform);
+            }
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
     }
 
     #[Route('/admin/movie/add', name: 'admin_movie_add')]
