@@ -34,114 +34,45 @@
 
     <div class="tab-content" id="films">
         <ul class="item-list">
-            <li>
-                <a href="{{ path('admin_movie_edit', { id: 1 }) }}" >  <!-- Test redirection to edit page -->
-                    <div class="item">
-                        <div class="round-checkbox">
-                            <input type="checkbox" id="checkbox-1" data-id="1" />
-                            <label for="checkbox-1"></label>
+            {% for movie in movies %}
+                <li>
+                    <a href="{{ path('admin_movie_edit', { id: movie.id }) }}">
+                        <div class="item">
+                            <div class="round-checkbox">
+                                <input type="checkbox"
+                                       id="checkbox-movie-{{ movie.id }}"
+                                       data-id="{{ movie.id }}" />
+                                <label for="checkbox-movie-{{ movie.id }}"></label>
+                            </div>
+                            <div>
+                                {{ movie.title }}
+                            </div>
                         </div>
-                        <div>
-                            Harry Potter i Kamień Inżynierski
-                        </div>
-                    </div>
-                </a>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-2" data-id="2" />
-                    <label for="checkbox-2"></label>
-                </div>
-                <div>
-                    Harry Potter i Komnata Habilitacji
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-3" data-id="3" />
-                    <label for="checkbox-3"></label>
-                </div>
-                <div>
-                    Harry Potter i Więzień Uczelni
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-4" data-id="4" />
-                    <label for="checkbox-4"></label>
-                </div>
-                <div>
-                    Harry Potter i Czara Dyplomowa
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-5" data-id="5" />
-                    <label for="checkbox-5"></label>
-                </div>
-                <div>
-                    Harry Potter i Zakon Poprawkowicza
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-6" data-id="6" />
-                    <label for="checkbox-6"></label>
-                </div>
-                <div>
-                    Harry Potter i Książę Pół-Algorytmu
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-7" data-id="7" />
-                    <label for="checkbox-7"></label>
-                </div>
-                <div>
-                    Harry Potter i Insygnia Egzaminacyjne
-                </div>
-            </li>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
     <div class="tab-content hidden" id="platforms">
         <ul class="item-list">
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-11" data-id="11" />
-                    <label for="checkbox-11"></label>
-                </div>
-                <div>
-                    Netflix
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-22" data-id="22" />
-                    <label for="checkbox-22"></label>
-                </div>
-                <div>
-                    Amazon Prime
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-33" data-id="33" />
-                    <label for="checkbox-33"></label>
-                </div>
-                <div>
-                    HBO Max
-                </div>
-            </li>
-            <li class="item">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="checkbox-44" data-id="44" />
-                    <label for="checkbox-44"></label>
-                </div>
-                <div>
-                    Disney+
-                </div>
-            </li>
+            {% for platform in streamingPlatforms %}
+                <li>
+                    <a href="{{ path('admin_platform_edit', { id: platform.id }) }}">
+                        <div class="item">
+                            <div class="round-checkbox">
+                                <input type="checkbox"
+                                       id="checkbox-platform-{{ platform.id }}"
+                                       data-id="{{ platform.id }}" />
+                                <label for="checkbox-platform-{{ platform.id }}"></label>
+                            </div>
+                            <div>
+                                {{ platform.name }}
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
@@ -151,8 +82,6 @@
         const buttons = document.querySelectorAll(".tab-button");
         const tabs = document.querySelectorAll(".tab-content");
         const addButton = document.getElementById('add-button');
-        const editButton = document.getElementById('edit-button');
-        const deleteButton = document.getElementById('delete-button');
 
         let currentTab = 'films';
         let selectedItemId = null;
@@ -185,40 +114,6 @@
             else if (currentTab === 'platforms')
             {
                 window.location.href = '{{ path("admin_platform_add") }}';
-            }
-        });
-
-        // Edycja
-        editButton.addEventListener('click', () =>
-        {
-            if (!selectedItemId)
-            {
-                alert('Proszę wybrać element do edycji');
-                return;
-            }
-
-            if (currentTab === 'films')
-            {
-                window.location.href = `/admin/movie/edit/${selectedItemId}`;
-            }
-            else if (currentTab === 'platforms')
-            {
-                window.location.href = `/admin/platform/edit/${selectedItemId}`;
-            }
-        });
-
-        // Usuwanie
-        deleteButton.addEventListener('click', () =>
-        {
-            if (!selectedItemId)
-            {
-                alert('Proszę wybrać element do usunięcia');
-                return;
-            }
-
-            if (confirm('Czy na pewno chcesz usunąć wybrany element?'))
-            {
-                // dodac usuwanie
             }
         });
     });
