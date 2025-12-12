@@ -17,7 +17,7 @@
     </header>
 
     <div class="tab-container">
-        <button class="tab-button active" data-tab="films" id="tab-films">FILMY</button>
+        <button class="tab-button active" data-tab="movies" id="tab-movies">FILMY</button>
         <button class="tab-button" data-tab="platforms" id="tab-platforms">PLATFORMY</button>
     </div>
 
@@ -28,11 +28,11 @@
         </div>
 
         <div class="search-container">
-            <input type="search" >
+            <input type="search" id="search-bar"/>
         </div>
     </div>
 
-    <div class="tab-content" id="films">
+    <div class="tab-content" id="movies">
         <ul class="item-list">
             {% for movie in movies %}
                 <li>
@@ -85,30 +85,71 @@
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".tab-button");
         const tabs = document.querySelectorAll(".tab-content");
-        const addButton = document.getElementById('add-button');
-        const deleteButton = document.getElementById('delete-button');
 
-        let currentTab = 'films';
+        const addButton = document.getElementById('add-button');
+        addButton.addEventListener('click', () => {
+            if (currentTab === 'movies') {
+                window.location.href = '{{ path("admin_movie_add") }}';
+            }
+            else if (currentTab === 'platforms') {
+                window.location.href = '{{ path("admin_platform_add") }}';
+            }
+        });
+
+        let currentTab = 'movies';
         let selectedItemId = null;
 
+        // buttons.forEach(button => {
+        //     button.addEventListener("click", () => {
+        //         const tabId = button.dataset.tab;
+        //         currentTab = tabId;
+        //
+        //         buttons.forEach(b => b.classList.remove("active"));
+        //         button.classList.add("active");
+        //
+        //         tabs.forEach(tab => {
+        //             tab.classList.toggle("hidden", tab.id !== tabId);
+        //         });
+        //
+        //         selectedItemId = null;
+        //     });
+        // })
+
         buttons.forEach(button => {
-            button.addEventListener("click", () =>
-            {
+            button.addEventListener("click", () => {
                 const tabId = button.dataset.tab;
                 currentTab = tabId;
 
                 buttons.forEach(b => b.classList.remove("active"));
                 button.classList.add("active");
 
-                tabs.forEach(tab =>
-                {
+                tabs.forEach(tab => {
                     tab.classList.toggle("hidden", tab.id !== tabId);
                 });
 
                 selectedItemId = null;
-            });
-        })
 
+                searchBar.value = "";
+
+                const items = document.getElementById(tabId).querySelectorAll("li");
+                items.forEach(item => item.style.display = "");
+            });
+        });
+
+        const searchBar = document.getElementById("search-bar");
+        searchBar.addEventListener("input", () => {
+            const query = searchBar.value.toLowerCase();
+
+            const activeTab = document.getElementById(currentTab);
+            const items = activeTab.querySelectorAll("li");
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(query) ? "" : "none";
+            });
+        });
+
+        const deleteButton = document.getElementById('delete-button');
         deleteButton.addEventListener("click", () => {
             const activeTab = document.getElementById(currentTab);
             const checkedBoxes = activeTab.querySelectorAll("input[type='checkbox']:checked");
@@ -121,7 +162,7 @@
             const ids = Array.from(checkedBoxes).map(cb => cb.dataset.id);
 
             const route =
-                currentTab === "films"
+                currentTab === "movies"
                     ? "/admin/movie/delete"
                     : "/admin/platform/delete";
 
@@ -146,18 +187,6 @@
                     console.error(err);
                     alert("Błąd po stronie klienta.");
                 });
-        });
-
-        addButton.addEventListener('click', () =>
-        {
-            if (currentTab === 'films')
-            {
-                window.location.href = '{{ path("admin_movie_add") }}';
-            }
-            else if (currentTab === 'platforms')
-            {
-                window.location.href = '{{ path("admin_platform_add") }}';
-            }
         });
     });
 </script>
