@@ -13,35 +13,37 @@ class MovieStreamingPlatform
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $movie = null;
+    #[ORM\ManyToOne(targetEntity: Movie::class)]
+    #[ORM\JoinColumn(name: 'movie', referencedColumnName: 'id', nullable: false)]
+    private ?Movie $movie = null;
 
-    #[ORM\Column]
-    private ?int $streamingPlatform = null;
+    #[ORM\ManyToOne(targetEntity: StreamingPlatform::class)]
+    #[ORM\JoinColumn(name: 'streaming_platform', referencedColumnName: 'id', nullable: false)]
+    private ?StreamingPlatform $streamingPlatform = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMovie(): ?int
+    public function getMovie(): ?Movie
     {
         return $this->movie;
     }
 
-    public function setMovie(int $movie): static
+    public function setMovie(?Movie $movie): static
     {
         $this->movie = $movie;
 
         return $this;
     }
 
-    public function getStreamingPlatform(): ?int
+    public function getStreamingPlatform(): ?StreamingPlatform
     {
         return $this->streamingPlatform;
     }
 
-    public function setStreamingPlatform(int $streamingPlatform): static
+    public function setStreamingPlatform(?StreamingPlatform $streamingPlatform): static
     {
         $this->streamingPlatform = $streamingPlatform;
 

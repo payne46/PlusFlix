@@ -16,28 +16,35 @@ class MovieStreamingPlatformRepository extends ServiceEntityRepository
         parent::__construct($registry, MovieStreamingPlatform::class);
     }
 
-    //    /**
-    //     * @return MovieStreamingPlatform[] Returns an array of MovieStreamingPlatform objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findPlatformsByMovieId(int $movieId): array
+    {
+        return $this->createQueryBuilder('msp')
+            ->select('msp', 'sp')
+            ->leftJoin('msp.streamingPlatform', 'sp')
+            ->where('msp.movie = :movieId')
+            ->setParameter('movieId', $movieId)
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?MovieStreamingPlatform
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findMoviesByPlatformId(int $platformId): array
+    {
+        return $this->createQueryBuilder('msp')
+            ->select('msp', 'm')
+            ->leftJoin('msp.movie', 'm')
+            ->where('msp.streamingPlatform = :platformId')
+            ->setParameter('platformId', $platformId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('msp')
+            ->select('msp', 'm', 'sp')
+            ->leftJoin('msp.movie', 'm')
+            ->leftJoin('msp.streamingPlatform', 'sp')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Admin;
 use App\Entity\Movie;
 use App\Entity\StreamingPlatform;
+use App\Entity\MovieStreamingPlatform;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -16,13 +17,14 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Configuration
         $this->loadAdmins($manager);
-
-        // Content
         $platforms = $this->loadStreamingPlatforms($manager);
-        $this->loadMovies($manager, $platforms);
+        $manager->flush();
 
+        $movies = $this->loadMovies($manager);
+        $manager->flush();
+
+        $this->assignPlatformsToMovies($manager, $movies, $platforms);
         $manager->flush();
     }
 
@@ -52,18 +54,21 @@ class AppFixtures extends Fixture
             $platform->setBanner($row['banner']);
             $platform->setWebsiteUrl($row['websiteUrl']);
             $manager->persist($platform);
-            
-            $platforms[$row['name']] = $platform;
+
+            $platforms[] = $platform;
         }
 
         return $platforms;
     }
 
-    private function loadMovies(ObjectManager $manager): void
+    private function loadMovies(ObjectManager $manager): array
     {
         $path = $this->projectDir . '/config/fixtures/movies.json';
         $data = $this->readJson($path);
 
+        $defaultColors = ['#0D9CFF', '#FF5733', '#33FF57', '#FF33F6', '#33FFF6', '#F6FF33', '#8A33FF', '#FF8A33', '#33FF8A', '#FF3333',];
+
+        $movies = [];
         $setRatingData = function (Movie $movie): void {
             $movie->setRating(random_int(1, 5));
             $movie->setRatingsCount(random_int(5, 100));
@@ -80,10 +85,53 @@ class AppFixtures extends Fixture
             $movie->setLength($row['length']);
             $movie->setCountry($row['country']);
             $setRatingData($movie);
+
+            if (isset($row['banner']) && !empty($row['banner']))
+            {
+                $movie->setBanner($row['banner']);
+            }
+            else
+            {
+                $randomColorIndex = array_rand($defaultColors);
+                $movie->setBanner($defaultColors[$randomColorIndex]);
+            }
+
             $manager->persist($movie);
+
+            $movies[] = $movie;
         }
+
+        return $movies;
     }
 
+    private function assignPlatformsToMovies(ObjectManager $manager, array $movies, array $platforms): void {
+        if (empty($platforms) || empty($movies))
+        {
+            return;
+        }
+
+        foreach ($movies as $movie)
+        {
+            $numPlatforms = min(random_int(1, 3), count($platforms));
+            $randomKeys = array_rand($platforms, $numPlatforms);
+
+            if (!is_array($randomKeys))
+            {
+                $randomKeys = [$randomKeys];
+            }
+
+            foreach ($randomKeys as $key)
+            {
+                $platform = $platforms[$key];
+
+                $moviePlatform = new MovieStreamingPlatform();
+                $moviePlatform->setMovie($movie);
+                $moviePlatform->setStreamingPlatform($platform);
+
+                $manager->persist($moviePlatform);
+            }
+        }
+    }
     private function readJson(string $path): array
     {
         if (!file_exists($path)) {

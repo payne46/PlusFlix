@@ -183,4 +183,36 @@ class Movie
 
         return $this;
     }
+    public function getBannerOrColor(): string
+    {
+        if (!empty($this->banner))
+        {
+            return $this->banner;
+        }
+
+        $colors = ['#2c3e50', '#3498db', '#e74c3c', '#f39c12', '#2ecc71', '#9b59b6', '#1abc9c'];
+        $index = $this->id ? ($this->id % count($colors)) : 0;
+
+        return $colors[$index];
+    }
+
+    public function getBannerStyle(): string
+    {
+        if (empty($this->banner))
+        {
+            $colors = ['#2c3e50', '#3498db', '#e74c3c', '#f39c12', '#2ecc71', '#9b59b6', '#1abc9c'];
+            $index = $this->id ? ($this->id % count($colors)) : 0;
+            return 'background-color: ' . $colors[$index];
+        }
+
+        if (str_starts_with($this->banner, '#')) {
+            return 'background-color: ' . $this->banner;
+        }
+
+        return "background: " . $this->banner;
+    }
+    public function getStreamingPlatforms(): array
+    {
+        return [];
+    }
 }
