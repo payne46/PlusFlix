@@ -1,141 +1,283 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block stylesheets %}
+    {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
         <link rel="stylesheet" href="{{ asset('css/movie-show.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-        {% endblock %}
-    </head>
-    <body>
-        <header>
-            {% include 'movie/banner.html.twig' %}
-        </header>
-        <a href="{{ path('app_home') }}">
-            <img id="return_button" src="{{ asset('images/return_arrow.png') }}" alt="return_button">
-        </a>
-        <div id="content">
-            <div id="left_data">
-                <div id="banner">
-                    <img id="heart_icon" src="{{ asset('images/empty_heart.svg') }}">
-                </div>
-                <div id="rating">
-                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
-                    <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon">
-                    <p id="rating_mean">(1)</p>
-                </div>
-            </div>
-
-            <div id="right_data">
-                <div id="title_contents">
-                    <div id="title_box">{{ movie.title }}</div>
-                </div>
-                <div id="description">{{ movie.description ?? 'Brak opisu.' }}</div>
-                <div id="properties_list">
-                    <div class="movie_property">Gatunek: <p class="movie_property_value">{{ movie.genre ?? '-' }}</p></div>
-                    <div class="movie_property">Data premiery:
-                    <p class="movie_property_value">
-                        {% if movie.releaseDate %}
-                            {{ movie.releaseDate|date('Y-m-d') }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </p></div>
-                    <div class="movie_property">Kraj produkcji: <p class="movie_property_value">{{ movie.country ?? '-' }}</p></div>
-                    <div class="movie_property">Reżyser: <p class="movie_property_value">{{ movie.director ?? '-' }}</p></div>
-                    <div class="movie_property">Scenarzysta: <p class="movie_property_value">{{ movie.screenwriter ?? '-' }}</p></div>
-                    <div class="movie_property">Długość:
-                    <p class="movie_property_value">
-                        {% if movie.length %}
-                            {{ movie.length }} min
-                        {% else %}
-                            -
-                        {% endif %}
-                    </p></div>
-                </div>
-            </div>
-
+    {% endblock %}
+</head>
+<body>
+<header>
+    {% include 'movie/banner.html.twig' %}
+</header>
+<a href="{{ path('app_home') }}">
+    <img id="return_button" src="{{ asset('images/return_arrow.png') }}" alt="return_button">
+</a>
+<div id="content">
+    <div id="left_data">
+        <div id="banner" style="{% if movie.banner %}
+                            {% if movie.banner starts with '#' %}
+                                background-color: {{ movie.banner }}
+                            {% else %}
+                                background-image: url('{{ movie.banner }}')
+                            {% endif %}
+                        {% endif %}">
+            <img id="heart_icon" src="{{ asset('images/empty_heart.svg') }}">
         </div>
-        <div id="platforms_list">
-            <div class="platform">
-                <div class="platform_baner"></div>
-                <button class="platform_button">Zobacz teraz</button>
-            </div>
-            <div class="platform">
-                <div class="platform_baner"></div>
-                <button class="platform_button">Zobacz teraz</button>
-            </div>
+        <div id="rating">
+            <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon" data-value="1">
+            <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon" data-value="2">
+            <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon" data-value="3">
+            <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon" data-value="4">
+            <img class="star" src="{{ asset('images/empty_star.svg') }}" alt="star_icon" data-value="5">
+            <p id="rating_mean">({{ movie.rating ?? '0' }})</p>
         </div>
+    </div>
 
+    <div id="right_data">
+        <div id="title_contents">
+            <div id="title_box">{{ movie.title }}</div>
+        </div>
+        <div id="description">{{ movie.description ?? 'Brak opisu.' }}</div>
+        <div id="properties_list">
+            <div class="movie_property">Gatunek: <p class="movie_property_value">{{ movie.genre ?? '-' }}</p></div>
+            <div class="movie_property">Data premiery:
+                <p class="movie_property_value">
+                    {% if movie.releaseDate %}
+                        {{ movie.releaseDate|date('Y-m-d') }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </p></div>
+            <div class="movie_property">Kraj produkcji: <p class="movie_property_value">{{ movie.country ?? '-' }}</p></div>
+            <div class="movie_property">Reżyser: <p class="movie_property_value">{{ movie.director ?? '-' }}</p></div>
+            <div class="movie_property">Scenarzysta: <p class="movie_property_value">{{ movie.screenwriter ?? '-' }}</p></div>
+            <div class="movie_property">Długość:
+                <p class="movie_property_value">
+                    {% if movie.length %}
+                        {{ movie.length }} min
+                    {% else %}
+                        -
+                    {% endif %}
+                </p></div>
+        </div>
+    </div>
 
-        <script>
-            const stars = document.querySelectorAll("#rating .star");
+</div>
+<div id="platforms_list">
+    {% if streamingPlatforms is defined and streamingPlatforms|length > 0 %}
+        {% for platform in streamingPlatforms %}
+            <div class="platform">
+                <div class="platform_baner">
+                    {% if platform.banner starts with '#' %}
+                        <div style="width: 100px; height: 60px; background-color: {{ platform.banner }}; border-radius: 8px;"></div>
+                    {% elseif platform.banner %}
+                        <img src="{{ platform.banner }}" alt="{{ platform.name }}" style="width: 100px; height: 60px; object-fit: contain;">
+                    {% else %}
+                        <div style="width: 100px; height: 60px; background-color: #ccc; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            {{ platform.name|slice(0, 3) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div style="margin: 10px 0; font-weight: bold;">{{ platform.name }}</div>
+                {% if platform.websiteUrl %}
+                    <a href="{{ platform.websiteUrl }}" target="_blank" class="platform_button">
+                        Zobacz teraz
+                    </a>
+                {% else %}
+                    <button class="platform_button" disabled>
+                        Brak linku
+                    </button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="text-align: center; padding: 20px; color: #666;">
+            Brak dostępnych platform streamingowych dla tego filmu.
+        </div>
+    {% endif %}
+</div>
 
-            const emptyStar = "{{ asset('images/empty_star.svg') }}";
-            const clickedStar = "{{ asset('images/clicked_star.svg') }}";
+<script>
+    function getCookie(name)
+    {
+        const cookies = document.cookie.split('; ');
+        for (const cookie of cookies)
+        {
+            const [cookieName, cookieValue] = cookie.split('=');
+            if (cookieName === name)
+            {
+                return decodeURIComponent(cookieValue);
+            }
+        }
+        return null;
+    }
 
-            stars.forEach((star, index) => {
-                star.addEventListener("click", () => {
+    function setCookie(name, value, days = 365)
+    {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/`;
+    }
 
-                    stars.forEach((s, i) => {
-                        s.src = i <= index ? clickedStar : emptyStar;
+    function getRatedMovies()
+    {
+        const ratedData = getCookie('rated_movies');
+        if (!ratedData) return {};
+        try
+        {
+            return JSON.parse(ratedData);
+        } catch
+        {
+            return {};
+        }
+    }
+
+    function saveRatedMovie(movieId, rating)
+    {
+        const ratedMovies = getRatedMovies();
+        ratedMovies[movieId] = rating;
+        setCookie('rated_movies', JSON.stringify(ratedMovies));
+    }
+
+    function isMovieRated(movieId)
+    {
+        const ratedMovies = getRatedMovies();
+        return ratedMovies.hasOwnProperty(movieId);
+    }
+
+    function getUserRating(movieId)
+    {
+        const ratedMovies = getRatedMovies();
+        return ratedMovies[movieId] || null;
+    }
+
+    const stars = document.querySelectorAll("#rating .star");
+    const ratingMean = document.getElementById("rating_mean");
+    const emptyStar = "{{ asset('images/empty_star.svg') }}";
+    const clickedStar = "{{ asset('images/clicked_star.svg') }}";
+    const movieId = {{ movie.id }};
+    let currentUserRating = null;
+    let isRated = false;
+
+    if (isMovieRated(movieId))
+    {
+        currentUserRating = getUserRating(movieId);
+        isRated = true;
+
+        stars.forEach((star, index) => {
+            if (index < currentUserRating) {
+                star.src = clickedStar;
+            }
+        });
+
+        stars.forEach(star => {
+            star.style.cursor = 'default';
+            star.style.opacity = '0.7';
+        });
+    }
+    stars.forEach((star) => {
+        star.addEventListener("click", () => {
+            if (isRated)
+            {
+                return;
+            }
+
+            const rating = parseInt(star.getAttribute('data-value'));
+
+            stars.forEach((s, index) => {
+                s.src = (index < rating) ? clickedStar : emptyStar;
+            });
+
+            fetch(`/movie/${movieId}/rate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rating: rating })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success)
+                    {
+                        saveRatedMovie(movieId, rating);
+                        isRated = true;
+
+                        stars.forEach(s => {
+                            s.style.cursor = 'default';
+                            s.style.opacity = '0.7';
+                        });
+
+                        ratingMean.textContent = `(${data.newRating})`;
+                    }
+                    else
+                    {
+                        alert('Wystąpił błąd podczas zapisywania oceny: ' + (data.error || 'Nieznany błąd'));
+                        stars.forEach(s => {
+                            s.src = emptyStar;
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Wystąpił błąd połączenia. Spróbuj ponownie.');
+                    stars.forEach(s => {
+                        s.src = emptyStar;
                     });
-
                 });
-            });
-            function getFavourites() {
-                const raw = document.cookie
-                    .split('; ')
-                    .find(row => row.startsWith('favourites='));
-                if (!raw) return [];
-                return raw.split('=')[1]
-                    .split(',')
-                    .map(Number)
-                    .filter(id => !isNaN(id));
-            }
+        });
+    });
 
-            function saveFavourites(list) {
-                document.cookie = "favourites=" + list.join(",") + ";path=/;max-age=31536000"; 
-            }
+    function getFavourites()
+    {
+        const raw = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('favourites='));
+        if (!raw) return [];
+        return raw.split('=')[1]
+            .split(',')
+            .map(Number)
+            .filter(id => !isNaN(id));
+    }
 
-            const heart = document.getElementById("heart_icon");
-            const movieId = {{ movie.id }}; 
+    function saveFavourites(list)
+    {
+        document.cookie = "favourites=" + list.join(",") + ";path=/;max-age=31536000";
+    }
 
-            const emptyHeart = "{{ asset('images/empty_heart.svg') }}";
-            const clickedHeart = "{{ asset('images/clicked_heart.svg') }}";
-         
-            let favourites = getFavourites();
-            if (favourites.includes(movieId)) {
-                heart.src = clickedHeart;
-            } else {
-                heart.src = emptyHeart;
-            }
-    
-            heart.addEventListener("click", () => {
-                favourites = getFavourites();
+    const heart = document.getElementById("heart_icon");
+    const emptyHeart = "{{ asset('images/empty_heart.svg') }}";
+    const clickedHeart = "{{ asset('images/clicked_heart.svg') }}";
 
-                if (favourites.includes(movieId)) {
-                    favourites = favourites.filter(id => id !== movieId);
-                    heart.src = emptyHeart;
-                } else {
-                    favourites.push(movieId);
-                    heart.src = clickedHeart;
-                }
+    let favourites = getFavourites();
+    if (favourites.includes(movieId)) {
 
-                saveFavourites(favourites);
-            });
-        </script>
-    </body>
+        heart.src = clickedHeart;
+    }
+    else
+    {
+        heart.src = emptyHeart;
+    }
+
+    heart.addEventListener("click", () => {
+        favourites = getFavourites();
+
+        if (favourites.includes(movieId)) {
+            favourites = favourites.filter(id => id !== movieId);
+            heart.src = emptyHeart;
+        } else {
+            favourites.push(movieId);
+            heart.src = clickedHeart;
+        }
+
+        saveFavourites(favourites);
+    });
+</script>
+</body>
 </html>
-
-
-

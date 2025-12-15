@@ -6,6 +6,17 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/admin-forms.css') }}">
+        <style>
+            .color-preview {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+        </style>
     {% endblock %}
 </head>
 <body>
@@ -80,8 +91,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="banner">URL banera</label>
-                    <input class="form-input" type="text" id="banner" name="banner" {% if action == 'edit' %}value="{{ movie.banner }}"{% endif %}>
+                    <label class="form-label" for="banner">Baner</label>
+                    <div style="display: flex; align-items: center;">
+                        <input class="form-input" type="text" id="banner" name="banner" {% if action == 'edit' %}value="{{ movie.banner }}"{% endif %} style="flex: 1;">
+                        <div id="colorPreview" class="color-preview"></div>
+                    </div>
+                    <small>Wpisz URL obrazka lub kolor HEX (zaczynający się od #)</small>
                 </div>
             </div>
 
@@ -92,6 +107,32 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        const bannerInput = document.getElementById('banner');
+        const colorPreview = document.getElementById('colorPreview');
+
+        function updateColorPreview()
+        {
+            const value = bannerInput.value.trim();
+
+            if (value.startsWith('#'))
+            {
+                colorPreview.style.backgroundColor = value;
+                colorPreview.style.display = 'inline-block';
+            }
+            else
+            {
+                colorPreview.style.display = 'none';
+            }
+        }
+
+        updateColorPreview();
+        bannerInput.addEventListener('input', updateColorPreview);
+    });
+</script>
 
 </body>
 </html>
